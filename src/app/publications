@@ -1,0 +1,22 @@
+import pubs from "@/content/publications/pubs.json";
+
+export default function Publications(){
+  return (
+    <div>
+      <h1 className="text-3xl font-bold tracking-tight mb-6">Publications</h1>
+      <ul className="space-y-4">
+        {pubs.map((p,i)=>(
+          <li key={i} className="rounded border p-4">
+            <div className="font-medium">{p.title}</div>
+            <div className="text-sm text-neutral-500">{p.status} • {p.year}</div>
+            <div className="mt-2 flex gap-3 text-sm">
+              {p.links?.code && <a className="underline" href={p.links.code}>Code</a>}
+              {p.links?.pdf && <a className="underline" href={p.links.pdf}>PDF</a>}
+              {p.links?.figures && <a className="underline" href={p.links.figures}>Figures</a>}
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
