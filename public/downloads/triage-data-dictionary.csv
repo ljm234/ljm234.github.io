@@ -1,0 +1,11 @@
+name,type,unit,allowed_range,required,description
+freshwater_exposure,binary,,0|1,true,Freshwater exposure within the exposure window
+days_since_exposure,integer,days,0..14,true,Days from exposure to presentation
+fever,binary,,0|1,true,Documented fever
+headache,binary,,0|1,true,Reported headache
+nuchal_rigidity,binary,,0|1,true,Clinical neck stiffness
+csf_wbc,integer,cells/µL,0..5000,true,CSF white blood cell count
+csf_protein,integer,mg/dL,0..1000,true,CSF protein
+csf_glucose,integer,mg/dL,0..200,true,CSF glucose
+pcr_available,binary,,0|1,true,PCR availability at time of triage
+microscopy_available,binary,,0|1,true,Microscopy availability at time of triage

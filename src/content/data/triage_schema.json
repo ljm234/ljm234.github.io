@@ -1,0 +1,12 @@
+[
+  {"name":"freshwater_exposure","type":"binary","unit":null,"allowed_range":"0|1","required":true,"description":"Freshwater exposure within the exposure window"},
+  {"name":"days_since_exposure","type":"integer","unit":"days","allowed_range":"0..14","required":true,"description":"Days from exposure to presentation"},
+  {"name":"fever","type":"binary","unit":null,"allowed_range":"0|1","required":true,"description":"Documented fever"},
+  {"name":"headache","type":"binary","unit":null,"allowed_range":"0|1","required":true,"description":"Reported headache"},
+  {"name":"nuchal_rigidity","type":"binary","unit":null,"allowed_range":"0|1","required":true,"description":"Clinical neck stiffness"},
+  {"name":"csf_wbc","type":"integer","unit":"cells/µL","allowed_range":"0..5000","required":true,"description":"CSF white blood cell count"},
+  {"name":"csf_protein","type":"integer","unit":"mg/dL","allowed_range":"0..1000","required":true,"description":"CSF protein"},
+  {"name":"csf_glucose","type":"integer","unit":"mg/dL","allowed_range":"0..200","required":true,"description":"CSF glucose"},
+  {"name":"pcr_available","type":"binary","unit":null,"allowed_range":"0|1","required":true,"description":"PCR availability at time of triage"},
+  {"name":"microscopy_available","type":"binary","unit":null,"allowed_range":"0|1","required":true,"description":"Microscopy availability at time of triage"}
+]
