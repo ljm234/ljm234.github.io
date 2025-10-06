@@ -1,0 +1,8 @@
+[
+  { "expected": 0.05, "observed": 0.06 },
+  { "expected": 0.10, "observed": 0.11 },
+  { "expected": 0.15, "observed": 0.16 },
+  { "expected": 0.20, "observed": 0.21 },
+  { "expected": 0.30, "observed": 0.28 },
+  { "expected": 0.40, "observed": 0.38 }
+]
