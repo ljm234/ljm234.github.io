@@ -1,12 +1,14 @@
-// Force Node runtime so we can read from the filesystem on Vercel
+// Ensure this runs on the Node runtime and is always dynamic (no static optimization)
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 import { NextResponse } from "next/server";
 import fs from "node:fs/promises";
 import path from "node:path";
 
 async function loadBuffer() {
-  // Try a few candidate paths — we know you have the second one
+  // Try multiple known paths; you confirmed these filenames exist in your repo
   const candidates = [
     path.join(process.cwd(), "public", "Jordan-Montenegro-CV-v3.pdf"),
     path.join(process.cwd(), "public", "downloads", "Jordan-Montenegro-CV.pdf"),
@@ -17,7 +19,7 @@ async function loadBuffer() {
       const buf = await fs.readFile(p);
       return { buf, filename: path.basename(p) };
     } catch {
-      // keep trying
+      // keep trying the next candidate
     }
   }
   return null;
@@ -27,7 +29,7 @@ export async function GET() {
   const res = await loadBuffer();
   if (!res) {
     return NextResponse.json(
-      { error: "CV not found in public/ (checked v3 and downloads path)" },
+      { error: "CV not found in public/ (checked v3 and downloads paths)" },
       { status: 404 }
     );
   }
@@ -37,7 +39,7 @@ export async function GET() {
     headers: {
       "Content-Type": "application/pdf",
       "Content-Length": String(buf.byteLength),
-      "Cache-Control": "public, max-age=3600, s-maxage=3600",
+      "Cache-Control": "no-store, max-age=0, s-maxage=0",
       "Content-Disposition": `inline; filename="${filename}"`,
     },
   });
