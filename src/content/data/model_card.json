@@ -1,15 +1,12 @@
 {
   "model_name": "Amoebanator LR v0.1.0",
-  "intended_use": "Educational demo of calibrated risk estimation for PAM triage.",
-  "not_for_use": "Not for clinical decision-making.",
-  "inputs": [
-    "freshwater_exposure","days_since_exposure","fever","headache","nuchal_rigidity",
-    "csf_wbc","csf_protein","csf_glucose","pcr_available","microscopy_available"
-  ],
-  "outputs": ["risk_probability","risk_band","confidence_interval"],
+  "intended_use": "Educational demo of calibrated risk estimation for early PAM triage.",
+  "not_for_use": "Not for clinical decision-making. Demo only.",
+  "inputs": ["freshwater_exposure", "days_since_exposure", "fever", "headache", "nuchal_rigidity", "csf_wbc", "csf_protein", "csf_glucose", "pcr_available", "microscopy_available"],
+  "outputs": ["risk_probability", "risk_band", "feature_contributions"],
   "metrics": { "AUROC": 0.86, "AUPRC": 0.41, "Brier": 0.10 },
   "calibration": "calibration.json",
   "data": { "type": "synthetic", "n": 1000, "seed": 42 },
-  "ethical_considerations": ["automation_bias","dataset_shift","false_reassurance"],
+  "ethical_considerations": ["automation_bias", "dataset_shift", "false_reassurance", "over-trust in unvalidated models"],
   "version": "0.1.0"
 }

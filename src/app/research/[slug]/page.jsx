@@ -4,12 +4,15 @@ import CalibrationChart from "@/components/charts/CalibrationChart";
 import calib from "@/content/data/calibration.json";
 import DecisionCurve from "@/components/charts/DecisionCurve";
 import dca from "@/content/data/decision_curve.json";
+import PRCurve from "@/components/charts/PRCurve";
+import PR from "@/content/data/pr.json";
 
 export default function ProjectPage({ params }) {
   const proj = projects.find((p) => p.slug === params.slug);
   if (!proj) return notFound();
 
   const S = proj.sections;
+
   return (
     <article className="prose dark:prose-invert max-w-none">
       <h1 className="mb-2">{proj.title}</h1>
@@ -26,6 +29,11 @@ export default function ProjectPage({ params }) {
           <h2>Calibration</h2>
           <div className="not-prose">
             <CalibrationChart data={calib} />
+          </div>
+
+          <h2>Precision–Recall</h2>
+          <div className="not-prose">
+            <PRCurve data={PR} />
           </div>
 
           <h2>Decision Curve (Net Benefit)</h2>
@@ -45,7 +53,9 @@ export default function ProjectPage({ params }) {
       <p>{S.ethics}</p>
 
       <hr />
-      <p className="text-sm text-neutral-500">Demo content for review. No clinical use.</p>
+      <p className="text-sm text-neutral-500">
+        Demo content for review. No clinical use.
+      </p>
     </article>
   );
 }

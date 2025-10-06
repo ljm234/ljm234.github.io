@@ -2,8 +2,8 @@
 
 import { useState, useMemo } from "react";
 import { predictRisk, contributions } from "@/lib/model";
-import card from "@/content/data/model_card.json";
 import ModelCard from "@/components/ModelCard";
+import card from "@/content/data/model_card.json";
 
 export default function Playground() {
   const [x, setX] = useState({
@@ -33,6 +33,7 @@ export default function Playground() {
 
       {/* RIGHT: Outputs */}
       <section className="space-y-4">
+        {/* Risk summary */}
         <div className="rounded-lg border p-4">
           <div className="text-sm text-neutral-500">Estimated risk</div>
           <div className="text-4xl font-bold">
@@ -44,6 +45,7 @@ export default function Playground() {
           </div>
         </div>
 
+        {/* Feature contributions */}
         <div className="rounded-lg border p-4">
           <div className="font-semibold mb-2">Top feature contributions</div>
           <ul className="text-sm space-y-1">
@@ -56,6 +58,7 @@ export default function Playground() {
           </ul>
         </div>
 
+        {/* Model Card */}
         <div className="rounded-lg border p-4">
           <ModelCard card={card} />
         </div>
@@ -69,16 +72,60 @@ export default function Playground() {
 function Form({ x, setX }) {
   return (
     <div className="grid sm:grid-cols-2 gap-4">
-      <Toggle label="Freshwater exposure" v={x.freshwater_exposure} on={(v) => setX({ ...x, freshwater_exposure: v })} />
-      <Number label="Days since exposure" min={0} max={14} step={1} v={x.days_since_exposure} on={(v) => setX({ ...x, days_since_exposure: v })} />
+      <Toggle
+        label="Freshwater exposure"
+        v={x.freshwater_exposure}
+        on={(v) => setX({ ...x, freshwater_exposure: v })}
+      />
+      <Number
+        label="Days since exposure"
+        min={0}
+        max={14}
+        step={1}
+        v={x.days_since_exposure}
+        on={(v) => setX({ ...x, days_since_exposure: v })}
+      />
       <Toggle label="Fever" v={x.fever} on={(v) => setX({ ...x, fever: v })} />
       <Toggle label="Headache" v={x.headache} on={(v) => setX({ ...x, headache: v })} />
-      <Toggle label="Nuchal rigidity" v={x.nuchal_rigidity} on={(v) => setX({ ...x, nuchal_rigidity: v })} />
-      <Number label="CSF WBC (cells/µL)" min={0} max={5000} step={10} v={x.csf_wbc} on={(v) => setX({ ...x, csf_wbc: v })} />
-      <Number label="CSF Protein (mg/dL)" min={0} max={1000} step={5} v={x.csf_protein} on={(v) => setX({ ...x, csf_protein: v })} />
-      <Number label="CSF Glucose (mg/dL)" min={0} max={200} step={1} v={x.csf_glucose} on={(v) => setX({ ...x, csf_glucose: v })} />
-      <Toggle label="PCR available" v={x.pcr_available} on={(v) => setX({ ...x, pcr_available: v })} />
-      <Toggle label="Microscopy available" v={x.microscopy_available} on={(v) => setX({ ...x, microscopy_available: v })} />
+      <Toggle
+        label="Nuchal rigidity"
+        v={x.nuchal_rigidity}
+        on={(v) => setX({ ...x, nuchal_rigidity: v })}
+      />
+      <Number
+        label="CSF WBC (cells/µL)"
+        min={0}
+        max={5000}
+        step={10}
+        v={x.csf_wbc}
+        on={(v) => setX({ ...x, csf_wbc: v })}
+      />
+      <Number
+        label="CSF Protein (mg/dL)"
+        min={0}
+        max={1000}
+        step={5}
+        v={x.csf_protein}
+        on={(v) => setX({ ...x, csf_protein: v })}
+      />
+      <Number
+        label="CSF Glucose (mg/dL)"
+        min={0}
+        max={200}
+        step={1}
+        v={x.csf_glucose}
+        on={(v) => setX({ ...x, csf_glucose: v })}
+      />
+      <Toggle
+        label="PCR available"
+        v={x.pcr_available}
+        on={(v) => setX({ ...x, pcr_available: v })}
+      />
+      <Toggle
+        label="Microscopy available"
+        v={x.microscopy_available}
+        on={(v) => setX({ ...x, microscopy_available: v })}
+      />
     </div>
   );
 }
@@ -88,7 +135,10 @@ function Toggle({ label, v, on }) {
     <label className="flex items-center justify-between gap-2 rounded border px-3 py-2">
       <span className="text-sm">{label}</span>
       <button
-        className={"text-xs rounded px-2 py-1 border " + (v ? "bg-black text-white dark:bg-white dark:text-black" : "")}
+        className={
+          "text-xs rounded px-2 py-1 border " +
+          (v ? "bg-black text-white dark:bg-white dark:text-black" : "")
+        }
         onClick={(e) => {
           e.preventDefault();
           on(v ? 0 : 1);
@@ -105,7 +155,16 @@ function Number({ label, v, on, min, max, step }) {
   return (
     <label className="block rounded border px-3 py-2">
       <div className="text-sm mb-1">{label}</div>
-      <input type="range" min={min} max={max} step={step} value={v} onChange={(e) => on(Number(e.target.value))} className="w-full" />
+      <input
+        type="range"
+        min={min}
+        max={max}
+        step={step}
+        value={v}
+        onChange={(e) => on(Number(e.target.value))}
+        className="w-full"
+        aria-label={label}
+      />
       <div className="text-xs text-neutral-500 mt-1">
         Value: <span className="tabular-nums">{v}</span>
       </div>

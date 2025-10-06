@@ -1,14 +1,19 @@
 [
   {
     "title": "Amoebanator: Early PAM triage with calibrated risk",
-    "status": "preprint (in prep)",
+    "status": "preprint (in preparation)",
     "year": 2025,
-    "links": { "code": "add it later :)" }
+    "links": {
+      "code": "I will update soon",
+      "figures": "I will update soon"
+    }
   },
   {
-    "title": "Montenegro’s Medium: low-cost culture optimization for N. fowleri",
-    "status": "methods (in prep)",
+    "title": "Montenegro’s Medium: a low-cost culture optimization for Naegleria fowleri",
+    "status": "methods note (in preparation)",
     "year": 2025,
-    "links": { "figures": "add it later" }
+    "links": {
+      "figures": "I will update soon"
+    }
   }
 ]

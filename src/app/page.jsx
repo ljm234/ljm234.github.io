@@ -1,7 +1,6 @@
 export default function Home() {
   return (
     <div className="space-y-10">
-      {/* HERO */}
       <section className="grid md:grid-cols-2 gap-8 items-center">
         <div>
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
@@ -10,13 +9,17 @@ export default function Home() {
           <p className="mt-4 text-neutral-600 dark:text-neutral-300">
             I build safe, explainable triage tools and research software for medicine.
           </p>
-          <div className="mt-6 flex gap-3">
+          <div className="mt-6 flex flex-wrap gap-3">
             <a href="/research" className="rounded bg-black text-white dark:bg-white dark:text-black px-4 py-2">
               View Research
             </a>
             <a href="/playground" className="rounded border px-4 py-2">
               Open Playground
             </a>
+          </div>
+          <div className="mt-3 flex flex-wrap gap-4">
+            <a href="/downloads/CV.pdf" className="text-sm underline">CV (PDF)</a>
+            <a href="/downloads/Research-Summary.pdf" className="text-sm underline">One-page Research Summary</a>
           </div>
         </div>
         <div className="grid grid-cols-3 gap-4">
@@ -30,6 +33,7 @@ export default function Home() {
       <section className="flex flex-wrap items-center gap-6 opacity-80">
         <span className="text-sm">Trusted by work with:</span>
         <Logo>Weber State</Logo>
+        <Logo>University of Utah</Logo>
         <Logo>Stanford AI in Healthcare</Logo>
       </section>
 
