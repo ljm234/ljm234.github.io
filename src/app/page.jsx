@@ -18,7 +18,7 @@ export default function Home() {
             </a>
           </div>
           <div className="mt-3 flex flex-wrap gap-4">
-            <a href="/Jordan-Montenegro-CV-v3.pdf?v=20251006" className="text-sm underline">CV (PDF)</a>
+            <a href="/Jordan-Montenegro-CV-2025-10-06.pdf" className="text-sm underline">CV (PDF)</a>
             <a href="/downloads/Research-Summary.pdf" className="text-sm underline">One-page Research Summary</a>
           </div>
         </div>
