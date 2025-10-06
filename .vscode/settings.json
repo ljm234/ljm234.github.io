@@ -1,7 +1,5 @@
 {
-  "eslint.validate": [
-    "javascript"
-  ],
+  "eslint.validate": ["javascript"],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
@@ -23,7 +21,7 @@
   "search.useIgnoreFiles": false,
   "search.exclude": {
     "**/node_modules": true,
-    "**/package-lock.json": true,
+    "**/package-lock.json": true
   },
-  "terminal.integrated.defaultProfile.linux": "zsh",
+  "terminal.integrated.defaultProfile.linux": "zsh"
 }
