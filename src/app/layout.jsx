@@ -1,10 +1,14 @@
+import ThemeToggle from "@/components/ThemeToggle";
+
 export const metadata = {
+  metadataBase: new URL("https://cs-220-portfolio-v3-ljm234.vercel.app"),
   title: "Jordan Montenegro — Clinical ML & Decision Support",
   description: "Portfolio with research, demos, and engineering artifacts.",
   openGraph: {
     title: "Jordan Montenegro — Clinical ML & Decision Support",
     description:
       "Clinical ML prototypes with calibration, decision-curve analysis, and safe demos.",
+    url: "https://cs-220-portfolio-v3-ljm234.vercel.app",
     siteName: "Jordan Montenegro",
     type: "website",
   },
@@ -15,13 +19,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="scroll-smooth">
       <head>
-        {/* initial theme (prevents flash) */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
               (function(){
-                try{var t=localStorage.getItem('theme'); if(t==='dark'){document.documentElement.classList.add('dark');}}
-                catch(e){}
+                try{
+                  var t = localStorage.getItem('theme');
+                  if(t==='dark'){ document.documentElement.classList.add('dark'); }
+                }catch(e){}
               })();`,
           }}
         />
@@ -59,21 +64,5 @@ export default function RootLayout({ children }) {
         </footer>
       </body>
     </html>
-  );
-}
-
-function ThemeToggle(){
-  return (
-    <button
-      className="rounded border border-neutral-300 dark:border-neutral-700 px-2 py-1 text-sm"
-      onClick={()=>{
-        const el = document.documentElement;
-        const dark = el.classList.toggle("dark");
-        try { localStorage.setItem("theme", dark ? "dark" : "light"); } catch {}
-      }}
-      aria-label="Toggle color theme"
-    >
-      Theme
-    </button>
   );
 }
