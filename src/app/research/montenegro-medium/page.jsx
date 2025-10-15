@@ -1,5 +1,8 @@
 import Image from "next/image";
-import MMPreview from "./MMPreview";
+import dynamic from "next/dynamic";
+
+// IMPORTANT: render the preview only on the client (no SSR during build)
+const MMPreview = dynamic(() => import("./MMPreview"), { ssr: false });
 
 export const metadata = {
   title: "Montenegro’s Medium (MM) — Jordan Montenegro",
@@ -8,7 +11,6 @@ export const metadata = {
 };
 
 export default function Page() {
-  // Data passed to the floating preview (all strings → serializable)
   const figures = [
     { src: "/research/mm/fig2-growth.png", alt: "Growth curve in MM (0–168 h)", caption: "Fig. 2 — Growth in MM" },
     { src: "/research/mm/fig3-fresh-old.png", alt: "Fresh vs. old MM at 48 h and 72 h", caption: "Fig. 3 — Fresh vs. old MM" },
@@ -32,60 +34,35 @@ export default function Page() {
         </p>
       </header>
 
-      {/* Key findings as a compact “evidence table” */}
+      {/* Key findings */}
       <section className="rounded-2xl border p-6">
         <h2 className="text-xl font-semibold mb-4">Key findings (evidence summary)</h2>
         <div className="grid md:grid-cols-2 gap-4 text-sm">
-          <div className="rounded-lg border p-4">
-            <div className="font-medium">Growth & doubling</div>
-            <ul className="list-disc pl-5 mt-2 space-y-1">
-              <li>Final density ≈ 1.72×10<sup>7</sup> cells·mL⁻¹ at 168 h</li>
-              <li>Overall doubling ≈ 28 h; early windows 9–12 h</li>
-            </ul>
-          </div>
-          <div className="rounded-lg border p-4">
-            <div className="font-medium">Fresh vs. old medium</div>
-            <ul className="list-disc pl-5 mt-2 space-y-1">
-              <li>48 h: fresh ≈ 1.5× higher than 30–35 d</li>
-              <li>72 h: fresh ≈ 2.8× higher than 30–35 d</li>
-            </ul>
-          </div>
-          <div className="rounded-lg border p-4">
-            <div className="font-medium">Transfer method</div>
-            <ul className="list-disc pl-5 mt-2 space-y-1">
-              <li>TD3 direct transfer (DT) is simplest and competitive</li>
-              <li>DT avoids centrifuge (CT 3000×g, 5 min) equipment/time</li>
-            </ul>
-          </div>
-          <div className="rounded-lg border p-4">
-            <div className="font-medium">Practicalities</div>
-            <ul className="list-disc pl-5 mt-2 space-y-1">
-              <li>Common ingredients; no antibiotics needed</li>
-              <li>Low cost: ≈ $0.12–$0.36 / 100 mL</li>
-            </ul>
-          </div>
+          <Card title="Growth & doubling">
+            <li>Final density ≈ 1.72×10<sup>7</sup> cells·mL⁻¹ at 168 h</li>
+            <li>Overall doubling ≈ 28 h; early windows 9–12 h</li>
+          </Card>
+          <Card title="Fresh vs. old medium">
+            <li>48 h: fresh ≈ 1.5× higher than 30–35 d</li>
+            <li>72 h: fresh ≈ 2.8× higher than 30–35 d</li>
+          </Card>
+          <Card title="Transfer method">
+            <li>TD3 direct transfer (DT) is simplest and competitive</li>
+            <li>DT avoids centrifuge (CT 3000×g, 5 min) equipment/time</li>
+          </Card>
+          <Card title="Practicalities">
+            <li>Common ingredients; no antibiotics needed</li>
+            <li>Low cost: ≈ $0.12–$0.36 / 100 mL</li>
+          </Card>
         </div>
       </section>
 
-      {/* Figures (static grid with captions) */}
+      {/* Figures */}
       <section className="space-y-4">
         <h2 className="text-xl font-semibold">Figures</h2>
-
-        <Figure
-          src="/research/mm/fig2-growth.png"
-          alt="Growth curve in Montenegro’s Medium"
-          caption="Fig. 2 — Growth in MM (0–168 h)."
-        />
-        <Figure
-          src="/research/mm/fig3-fresh-old.png"
-          alt="Fresh vs old medium at 48 h and 72 h"
-          caption="Fig. 3 — Fresh vs old MM at 48 h and 72 h."
-        />
-        <Figure
-          src="/research/mm/fig4-passage.png"
-          alt="Passage timing & method (TD3–TD5; DT vs CT)"
-          caption="Fig. 4 — Passage timing & method (TD3–TD5; DT vs CT)."
-        />
+        <Figure src="/research/mm/fig2-growth.png" alt="Growth curve in MM" caption="Fig. 2 — Growth in MM (0–168 h)." />
+        <Figure src="/research/mm/fig3-fresh-old.png" alt="Fresh vs old MM" caption="Fig. 3 — Fresh vs old MM at 48 h and 72 h." />
+        <Figure src="/research/mm/fig4-passage.png" alt="Passage timing & method" caption="Fig. 4 — Passage timing & method (TD3–TD5; DT vs CT)." />
 
         <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
           {[
@@ -95,17 +72,8 @@ export default function Page() {
             { src: "/research/mm/day-10.png", caption: "Day 10" },
           ].map((f) => (
             <figure key={f.src} className="rounded-xl border overflow-hidden">
-              <Image
-                src={f.src}
-                alt={f.caption}
-                width={1024}
-                height={768}
-                className="w-full h-auto object-cover"
-                sizes="(max-width: 768px) 50vw, 25vw"
-              />
-              <figcaption className="p-2 text-xs text-neutral-600 dark:text-neutral-400">
-                {f.caption}
-              </figcaption>
+              <Image src={f.src} alt={f.caption} width={1024} height={768} className="w-full h-auto object-cover" sizes="(max-width:768px) 50vw, 25vw" />
+              <figcaption className="p-2 text-xs text-neutral-600 dark:text-neutral-400">{f.caption}</figcaption>
             </figure>
           ))}
         </div>
@@ -115,16 +83,12 @@ export default function Page() {
       <section className="rounded-2xl border p-6">
         <h2 className="text-xl font-semibold">Downloads</h2>
         <ul className="list-disc pl-6 mt-2">
-          <li>
-            <a className="underline" href="/papers/montenegro-medium.docx">Manuscript (DOCX)</a>
-          </li>
-          <li>
-            <a className="underline" href="/downloads/Research-Summary.pdf">One-page summary</a>
-          </li>
+          <li><a className="underline" href="/papers/montenegro-medium.docx">Manuscript (DOCX)</a></li>
+          <li><a className="underline" href="/downloads/Research-Summary.pdf">One-page summary</a></li>
         </ul>
       </section>
 
-      {/* Floating preview (button bottom-right → glass drawer + lightbox) */}
+      {/* Client-only floating preview (not SSR'd) */}
       <MMPreview
         abstract="Serum-free, low-cost axenic medium enabling robust Naegleria fowleri growth with fast early doubling (9–12 h) and simple TD3 direct transfer. Fresh batches outperform aged (30–35 d) medium at 48/72 h."
         figures={figures}
@@ -133,20 +97,20 @@ export default function Page() {
   );
 }
 
+function Card({ title, children }) {
+  return (
+    <div className="rounded-lg border p-4">
+      <div className="font-medium">{title}</div>
+      <ul className="list-disc pl-5 mt-2 space-y-1">{children}</ul>
+    </div>
+  );
+}
+
 function Figure({ src, alt, caption }) {
   return (
     <figure className="rounded-xl border overflow-hidden">
-      <Image
-        src={src}
-        alt={alt}
-        width={1400}
-        height={900}
-        className="w-full h-auto object-contain bg-white dark:bg-neutral-950"
-        sizes="100vw"
-      />
-      <figcaption className="p-3 text-sm text-neutral-600 dark:text-neutral-400">
-        {caption}
-      </figcaption>
+      <Image src={src} alt={alt} width={1400} height={900} className="w-full h-auto object-contain bg-white dark:bg-neutral-950" sizes="100vw" />
+      <figcaption className="p-3 text-sm text-neutral-600 dark:text-neutral-400">{caption}</figcaption>
     </figure>
   );
 }
