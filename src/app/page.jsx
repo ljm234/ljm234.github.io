@@ -1,12 +1,10 @@
+// /src/app/page.jsx
 export default function Home() {
   return (
     <div className="space-y-10">
       <section className="grid md:grid-cols-2 gap-8 items-center">
         <div>
-          <h1
-            data-testid="hero-title"
-            className="text-4xl md:text-5xl font-bold tracking-tight"
-          >
+          <h1 data-testid="hero-title" className="text-4xl md:text-5xl font-bold tracking-tight">
             AI/ML Research Engineer & Clinical ML Researcher
           </h1>
           <p className="mt-4 text-neutral-600 dark:text-neutral-300">
@@ -42,28 +40,19 @@ export default function Home() {
       <section>
         <h2 className="text-2xl font-semibold tracking-tight mb-4">Research highlights</h2>
         <div className="grid md:grid-cols-3 gap-6">
-          <Card
-            title="Amoebanator: Early PAM Triage CDS"
-            href="/research/amoebanator"
-            desc="Risk model with calibration, decision curve, and explainability."
-          />
-          <Card
-            title="Montenegro’s Medium (MM)"
-            href="/research/montenegro-medium"
-            desc="Serum-free, low-cost axenic medium enabling robust N. fowleri growth."
-          />
-          <Card
-            title="Organelle-Target Discovery for Selective Therapy"
-            href="/research/organelle-targets"
-            desc="ER/COPII & ER–mitochondria Ca²⁺ coupling nominated via LDH/Caspase/JC-1 screens."
-          />
+          <Card title="Amoebanator CDS" href="/research/amoebanator"
+            desc="Early PAM triage with risk calibration, decision curve, and explainability." />
+          <Card title="Montenegro’s Medium" href="/research/montenegro-medium"
+            desc="Low-cost culture medium with 3–5× growth for Naegleria fowleri." />
+          <Card title="ER-Stress in N. fowleri" href="/research/er-stress"
+            desc="Drug response assays and mitochondrial dysfunction signatures." />
         </div>
       </section>
     </div>
   );
 }
 
-function Metric({ k, v }) {
+function Metric({k, v}) {
   return (
     <div className="rounded-lg border p-4">
       <div className="text-3xl font-bold">{k}</div>
@@ -71,10 +60,8 @@ function Metric({ k, v }) {
     </div>
   );
 }
-function Logo({ children }) {
-  return <div className="text-sm px-3 py-1 rounded border">{children}</div>;
-}
-function Card({ title, desc, href }) {
+function Logo({children}){ return <div className="text-sm px-3 py-1 rounded border">{children}</div>; }
+function Card({title, desc, href}){
   return (
     <a href={href} className="rounded-lg border p-4 hover:bg-neutral-50 dark:hover:bg-neutral-900">
       <div className="font-semibold">{title}</div>
