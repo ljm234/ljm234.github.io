@@ -4,14 +4,14 @@ export default function Home() {
       <section className="grid md:grid-cols-2 gap-8 items-center">
         <div>
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
-            Clinical ML & Decision Support
+            AI/ML Research Engineer & Clinical ML Researcher
           </h1>
           <p className="mt-4 text-neutral-600 dark:text-neutral-300">
-            I build safe, explainable triage tools and research software for medicine.
+            I build and research ML for medicine and applied CS, to serve real people.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <a href="/research" className="rounded bg-black text-white dark:bg-white dark:text-black px-4 py-2">
-              View Research
+              View Research and Projects
             </a>
             <a href="/playground" className="rounded border px-4 py-2">
               Open Playground
@@ -24,7 +24,7 @@ export default function Home() {
         </div>
         <div className="grid grid-cols-3 gap-4">
           <Metric k="3–5×" v="Montenegro’s Medium growth" />
-          <Metric k="16-pt" v="Amoebanator triage score" />
+          <Metric k="16-pt" v="Amoebanator - CDS" />
           <Metric k="650+" v="Service hours" />
         </div>
       </section>
@@ -33,8 +33,6 @@ export default function Home() {
       <section className="flex flex-wrap items-center gap-6 opacity-80">
         <span className="text-sm">Trusted by work with:</span>
         <Logo>Weber State</Logo>
-        <Logo>University of Utah</Logo>
-        <Logo>Stanford AI in Healthcare</Logo>
       </section>
 
       {/* HIGHLIGHTS */}
