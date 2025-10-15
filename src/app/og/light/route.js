@@ -1,6 +1,8 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
+export const contentType = "image/png";
+export const size = { width: 1200, height: 630 };
 
 export async function GET() {
   return new ImageResponse(
@@ -32,11 +34,11 @@ export async function GET() {
             <line key={"x" + i} x1={i * 40} y1="0" x2={i * 40} y2="630" stroke="#111111" strokeWidth="1" />
           ))}
           {Array.from({ length: 630 / 40 }).map((_, i) => (
-            <line key={"y" + i} x1="0" y1={i * 40} x2="1200" y2={i * 40} stroke="#111111" strokeWidth="1" />
+            <line key={"y" + i} x1="0" y1={i * 40} x2={1200} y2={i * 40} stroke="#111111" strokeWidth="1" />
           ))}
         </svg>
       </div>
     ),
-    { width: 1200, height: 630 }
+    size
   );
 }
