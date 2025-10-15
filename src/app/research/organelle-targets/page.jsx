@@ -1,33 +1,34 @@
 export const metadata = {
-  title: "Montenegro’s Medium (MM) — Jordan Montenegro",
-  description: "Serum-free, low-cost axenic medium enabling robust Naegleria fowleri growth.",
+  title: "Organelle-Target Discovery — Jordan Montenegro",
+  description:
+    "Open medium + LDH/Caspase/JC-1 screens nominate ER/COPII & ER–mitochondria Ca²⁺ coupling as leads.",
 };
 
 export default function Page() {
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-bold tracking-tight">Montenegro’s Medium (MM)</h1>
+      <h1 className="text-3xl font-bold tracking-tight">
+        Organelle-Target Discovery for Selective Amoebicidal Therapy
+      </h1>
 
       <p className="text-neutral-700 dark:text-neutral-300">
-        A simple <strong>serum-free, low-cost</strong> axenic medium that supports robust{" "}
-        <em>Naegleria fowleri</em> growth and routine passaging. Mean density rose from
-        2.05×10<sup>5</sup> to 1.72×10<sup>7</sup> cells·mL⁻¹ over 168 h with an overall
-        doubling time ≈ 28 h; early windows were faster (≈12 h at 0–24 h; ≈9 h at 24–48 h).
-        Fresh batches outperformed 30–35-day batches at 48 h (~1.55×) and 72 h (~2.77×);
-        direct transfer at Day 3 (TD3) matched or beat centrifuge transfer and is the simplest default. :contentReference[oaicite:2]{index=2}
+        We paired an open culture medium with a reproducible 96-well screen that reads
+        necrosis (LDH, 24 h), apoptosis (caspase-3, 48 h), and mitochondrial potential
+        (JC-1, 72 h) in <em>N. fowleri</em> alone and HeLa + <em>N. fowleri</em> co-culture.
+        At tested doses, perturbing the ER/secretory axis (thapsigargin + brefeldin A, ± metformin)
+        reduced early host-cell injury and preserved Δψm, nominating <strong>ER/COPII</strong> and
+        <strong> ER–mitochondria Ca²⁺ coupling</strong> as tractable targets for selective, rapid kill.
       </p>
 
       <ul className="list-disc pl-6">
-        <li>Ingredients are common; no antibiotics; standard sterile technique. :contentReference[oaicite:3]{index=3}</li>
-        <li>Repeated subculture &gt;50 passages without loss of routine growth. :contentReference[oaicite:4]{index=4}</li>
-        <li>Cost check ≈ $0.12–$0.36 / 100 mL vs $8–$23 for serum formulas. :contentReference[oaicite:5]{index=5}</li>
+        <li>Per-plate anchors & normalization; raw signal shown when anchors collapse.</li>
+        <li>Next steps: dose-response grids, combination index (Chou–Talalay), selectivity indices, neuronal models.</li>
       </ul>
 
       <div className="rounded-lg border p-4">
         <div className="font-medium mb-2">Downloads</div>
         <ul className="list-disc pl-6">
-          <li><a className="underline" href="/papers/montenegro-medium.docx">Manuscript (DOCX)</a></li>
-          <li><a className="underline" href="/downloads/Research-Summary.pdf">One-page summary</a></li>
+          <li><a className="underline" href="/papers/organelle-targets.docx">Manuscript (DOCX)</a></li>
         </ul>
       </div>
     </div>
