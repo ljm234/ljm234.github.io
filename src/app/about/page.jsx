@@ -3,7 +3,7 @@ export default function About(){
     <div className="space-y-6">
       <h1 className="text-3xl font-bold tracking-tight">About</h1>
       <p>
-        I’m Jordan Montenegro. I build clinical ML tools and research software that emphasize
+        I’m Jordan Montenegro. I build ML/AI tools and research software that emphasize
         calibration, decision utility, and safety for real workflows.
       </p>
 

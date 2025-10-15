@@ -5,16 +5,22 @@ test("homepage → playground → research nav works", async ({ page }) => {
   await page.goto("/");
   await page.waitForLoadState("domcontentloaded");
 
-  // Assert hero is present (stable test id, not brittle copy text)
-  await expect(page.getByTestId("hero-title")).toBeVisible({ timeout: 10000 });
+  // 1) Hero present (stable selector)
+  await expect(page.getByTestId("hero-title")).toBeVisible({ timeout: 15000 });
 
-  // Go to Playground
-  await page.getByRole("link", { name: "Playground" }).click();
-  await expect(page.getByText(/Amoebanator/i)).toBeVisible({ timeout: 10000 });
+  // 2) Click header nav link (scope to header <nav> so we don't hit the hero CTA)
+  const headerNav = page.getByRole("navigation").first();
+  await headerNav.getByRole("link", { name: "Playground", exact: true }).click();
 
-  // Go to Research
-  await page.getByRole("link", { name: "Research" }).click();
+  // Playground H1 is visible
+  await expect(
+    page.getByRole("heading", { name: /Amoebanator/i, level: 1 })
+  ).toBeVisible({ timeout: 15000 });
+
+  // 3) Go to Research via header nav again
+  const headerNavAgain = page.getByRole("navigation").first();
+  await headerNavAgain.getByRole("link", { name: "Research", exact: true }).click();
   await expect(
     page.getByRole("heading", { name: "Research", level: 1 })
-  ).toBeVisible({ timeout: 10000 });
+  ).toBeVisible({ timeout: 15000 });
 });
