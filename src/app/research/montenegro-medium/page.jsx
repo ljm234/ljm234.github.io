@@ -1,7 +1,6 @@
-import Image from "next/image";
 import dynamic from "next/dynamic";
 
-// IMPORTANT: render the preview only on the client (no SSR during build)
+// Client-only floating preview (no SSR)
 const MMPreview = dynamic(() => import("./MMPreview"), { ssr: false });
 
 export const metadata = {
@@ -14,7 +13,7 @@ export default function Page() {
   const figures = [
     { src: "/research/mm/fig2-growth.png", alt: "Growth curve in MM (0–168 h)", caption: "Fig. 2 — Growth in MM" },
     { src: "/research/mm/fig3-fresh-old.png", alt: "Fresh vs. old MM at 48 h and 72 h", caption: "Fig. 3 — Fresh vs. old MM" },
-    { src: "/research/mm/fig4-passage.png", alt: "Passage timing & method effects (TD3–TD5; DT vs CT)", caption: "Fig. 4 — Passage timing/method" },
+    { src: "/research/mm/fig4-passage.png", alt: "Passage timing & method (TD3–TD5; DT vs CT)", caption: "Fig. 4 — Passage timing/method" },
     { src: "/research/mm/day-0.png", alt: "Day 0 micrograph", caption: "Day 0" },
     { src: "/research/mm/day-3.png", alt: "Day 3 micrograph", caption: "Day 3" },
     { src: "/research/mm/day-7.png", alt: "Day 7 micrograph", caption: "Day 7" },
@@ -72,7 +71,7 @@ export default function Page() {
             { src: "/research/mm/day-10.png", caption: "Day 10" },
           ].map((f) => (
             <figure key={f.src} className="rounded-xl border overflow-hidden">
-              <Image src={f.src} alt={f.caption} width={1024} height={768} className="w-full h-auto object-cover" sizes="(max-width:768px) 50vw, 25vw" />
+              <img src={f.src} alt={f.caption} className="w-full h-auto object-cover" loading="lazy" />
               <figcaption className="p-2 text-xs text-neutral-600 dark:text-neutral-400">{f.caption}</figcaption>
             </figure>
           ))}
@@ -109,7 +108,7 @@ function Card({ title, children }) {
 function Figure({ src, alt, caption }) {
   return (
     <figure className="rounded-xl border overflow-hidden">
-      <Image src={src} alt={alt} width={1400} height={900} className="w-full h-auto object-contain bg-white dark:bg-neutral-950" sizes="100vw" />
+      <img src={src} alt={alt} className="w-full h-auto object-contain bg-white dark:bg-neutral-950" loading="lazy" />
       <figcaption className="p-3 text-sm text-neutral-600 dark:text-neutral-400">{caption}</figcaption>
     </figure>
   );

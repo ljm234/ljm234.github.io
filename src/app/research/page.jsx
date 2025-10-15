@@ -1,3 +1,7 @@
+import dynamic from "next/dynamic";
+
+const PreviewButton = dynamic(() => import("@/components/PreviewButton"), { ssr: false });
+
 export const metadata = {
   title: "Research — Jordan Montenegro",
   description: "Clinical ML + microbiology projects.",
@@ -15,6 +19,16 @@ const items = [
     title: "Montenegro’s Medium (MM)",
     desc: "Serum-free, low-cost axenic medium enabling robust Naegleria fowleri growth.",
     tags: ["Wet Lab", "Optimization"],
+    preview: {
+      abstract:
+        "Serum-free, low-cost axenic medium enabling robust growth with fast early doubling (9–12 h). Fresh batches outperform 30–35 d; TD3 direct transfer is simple and effective.",
+      figures: [
+        { src: "/research/mm/fig2-growth.png", caption: "Growth 0–168 h" },
+        { src: "/research/mm/fig3-fresh-old.png", caption: "Fresh vs old (48/72 h)" },
+        { src: "/research/mm/fig4-passage.png", caption: "TD3–TD5; DT vs CT" },
+        { src: "/research/mm/day-3.png", caption: "Day 3 micrograph" },
+      ],
+    },
   },
   {
     slug: "organelle-targets",
@@ -38,9 +52,12 @@ export default function ResearchPage() {
                 <span key={t} className="text-xs rounded border px-2 py-0.5">{t}</span>
               ))}
             </div>
-            <a className="mt-3 inline-block underline" href={`/research/${p.slug}`}>
-              Open project →
-            </a>
+            <div className="mt-3 flex items-center">
+              <a className="underline" href={`/research/${p.slug}`}>Open project →</a>
+              {p.preview && (
+                <PreviewButton label="Quick Preview" abstract={p.preview.abstract} items={p.preview.figures} />
+              )}
+            </div>
           </article>
         ))}
       </div>
