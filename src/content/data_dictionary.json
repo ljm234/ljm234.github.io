@@ -1,0 +1,23 @@
+{
+  "entity": "PAM_Triage",
+  "version": "0.1.0",
+  "fields": [
+    {"name":"patient_id","type":"string","required":true,"desc":"Local de-ID key"},
+    {"name":"freshwater_exposure","type":"int{0,1}","required":true,"desc":"Any freshwater exposure within prior 14 days"},
+    {"name":"days_since_exposure","type":"int[0,30]","required":true,"desc":"Days since suspected exposure"},
+    {"name":"fever","type":"int{0,1}","required":true,"desc":"Fever present"},
+    {"name":"headache","type":"int{0,1}","required":true,"desc":"Headache present"},
+    {"name":"nuchal_rigidity","type":"int{0,1}","required":true,"desc":"Neck stiffness"},
+    {"name":"csf_wbc","type":"int[0,5000]","required":false,"desc":"CSF white cell count (cells/µL)"},
+    {"name":"csf_protein","type":"int[0,1000]","required":false,"desc":"CSF protein (mg/dL)"},
+    {"name":"csf_glucose","type":"int[0,200]","required":false,"desc":"CSF glucose (mg/dL)"},
+    {"name":"pcr_available","type":"int{0,1}","required":false,"desc":"PCR modality available"},
+    {"name":"microscopy_available","type":"int{0,1}","required":false,"desc":"Microscopy modality available"},
+    {"name":"label_pam","type":"int{0,1}","required":true,"desc":"Final diagnosis: PAM (1) vs not (0)"}
+  ],
+  "notes": [
+    "De-identified only; no dates of birth or direct identifiers.",
+    "Shift all dates to relative offsets; drop MRNs/visit IDs.",
+    "Minimum cell size in any report ≥ 10."
+  ]
+}

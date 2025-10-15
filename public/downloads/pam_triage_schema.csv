@@ -1,0 +1,13 @@
+column,type,required,description
+patient_id,string,yes,Local de-ID key
+freshwater_exposure,int{0,1},yes,Any freshwater exposure within prior 14 days
+days_since_exposure,int[0,30],yes,Days since suspected exposure
+fever,int{0,1},yes,Fever present
+headache,int{0,1},yes,Headache present
+nuchal_rigidity,int{0,1},yes,Neck stiffness
+csf_wbc,int[0,5000],no,CSF white cell count (cells/µL)
+csf_protein,int[0,1000],no,CSF protein (mg/dL)
+csf_glucose,int[0,200],no,CSF glucose (mg/dL)
+pcr_available,int{0,1},no,PCR modality available
+microscopy_available,int{0,1},no,Microscopy modality available
+label_pam,int{0,1},yes,Final diagnosis: PAM (1) vs not (0)

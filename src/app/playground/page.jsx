@@ -3,6 +3,8 @@ import { useState, useMemo } from "react";
 import { predictRisk, contributions, DEFAULT_INPUT } from "@/lib/model";
 import ModelCard from "@/components/ModelCard";
 import card from "@/content/data/model_card.json";
+import ThresholdTuner from "@/components/ThresholdTuner";
+import ReliabilityTable from "@/components/ReliabilityTable"; // optional
 
 export default function Playground(){
   const [x, setX] = useState(DEFAULT_INPUT);
@@ -15,12 +17,14 @@ export default function Playground(){
 
   return (
     <div className="grid lg:grid-cols-2 gap-8">
+      {/* LEFT: inputs */}
       <section className="space-y-4">
         <h1 className="text-3xl font-bold tracking-tight">Amoebanator — Triage Demo</h1>
         <p className="text-sm text-neutral-500">Demo only — not for clinical use.</p>
         <Form x={x} setX={setX} />
       </section>
 
+      {/* RIGHT: outputs */}
       <section className="space-y-4">
         <div className="rounded-lg border p-4">
           <div className="text-sm text-neutral-500">Estimated risk</div>
@@ -49,6 +53,13 @@ export default function Playground(){
         <div className="rounded-lg border p-4">
           <ModelCard card={card} />
         </div>
+      </section>
+
+      {/* NEW: safety + decision tooling (full width on large screens) */}
+      <section className="space-y-4 lg:col-span-2">
+        <ThresholdTuner />
+        {/* Optional reliability block: comment out if you don't want it visible */}
+        <ReliabilityTable />
       </section>
     </div>
   );

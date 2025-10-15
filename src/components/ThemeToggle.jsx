@@ -1,32 +1,49 @@
 "use client";
+
 import { useEffect, useState } from "react";
 
 export default function ThemeToggle() {
-  const [isDark, setIsDark] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const [dark, setDark] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     try {
       const stored = localStorage.getItem("theme");
-      const dark = stored ? stored === "dark" : document.documentElement.classList.contains("dark");
-      document.documentElement.classList.toggle("dark", dark);
-      setIsDark(dark);
+      const isDark = stored ? stored === "dark" : false;
+      setDark(isDark);
+      document.documentElement.classList.toggle("dark", isDark);
     } catch {}
   }, []);
 
   function toggle() {
-    const next = !isDark;
+    const next = !dark;
+    setDark(next);
+    try {
+      localStorage.setItem("theme", next ? "dark" : "light");
+    } catch {}
     document.documentElement.classList.toggle("dark", next);
-    try { localStorage.setItem("theme", next ? "dark" : "light"); } catch {}
-    setIsDark(next);
+  }
+
+  if (!mounted) {
+    return (
+      <button
+        className="rounded border border-neutral-300 dark:border-neutral-700 px-2 py-1 text-sm opacity-50"
+        aria-label="Toggle color theme"
+        disabled
+      >
+        Theme
+      </button>
+    );
   }
 
   return (
     <button
+      className="rounded border border-neutral-300 dark:border-neutral-700 px-2 py-1 text-sm"
       onClick={toggle}
       aria-label="Toggle color theme"
-      className="rounded border border-neutral-300 dark:border-neutral-700 px-2 py-1 text-sm"
     >
-      {isDark ? "Light" : "Dark"}
+      {dark ? "Light" : "Dark"}
     </button>
   );
 }
