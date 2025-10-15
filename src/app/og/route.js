@@ -49,8 +49,4 @@ export async function GET() {
     ),
     size
   );
-}git checkout -b feat/og-route
-git add -A
-git commit -m "feat: dynamic OG banner at /og"
-git push -u origin feat/og-route
-# merge PR → Vercel auto-deploy
+}
