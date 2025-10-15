@@ -26,7 +26,7 @@ export default function AboutPage() {
             <ul className="list-disc pl-5 space-y-1">
               <li>Logistic regression, decision trees, ensembles</li>
               <li>Bias–variance, regularization, early stopping</li>
-              <li>Model calibration & decision-curve analysis</li>
+              <li>Model calibration &amp; decision-curve analysis</li>
               <li>Train/val/test discipline, leakage controls</li>
             </ul>
           </Card>
@@ -35,44 +35,44 @@ export default function AboutPage() {
             <ul className="list-disc pl-5 space-y-1">
               <li>Forward/Backward propagation (L-layer networks)</li>
               <li>Vectorized linear/nonlinear blocks</li>
-              <li>CNNs & sequence models (RNN/LSTM/attention basics)</li>
+              <li>CNNs &amp; sequence models (RNN/LSTM/attention basics)</li>
               <li>Initialization, normalization, optimizers</li>
             </ul>
           </Card>
 
-          <Card title="Evaluation & Safety">
+          <Card title="Evaluation &amp; Safety">
             <ul className="list-disc pl-5 space-y-1">
               <li>Reliability diagrams, Brier, ECE/MCE</li>
-              <li>Prevalence shift & prior-odds correction</li>
-              <li>Conformal thresholds (FN ≤ α) & uncertainty</li>
-              <li>Readable error budgets & accessibility (a11y)</li>
+              <li>Prevalence shift &amp; prior-odds correction</li>
+              <li>Conformal thresholds (FN ≤ α) &amp; uncertainty</li>
+              <li>Readable error budgets &amp; accessibility (a11y)</li>
             </ul>
           </Card>
 
-          <Card title="Software & MLOps">
+          <Card title="Software &amp; MLOps (CS/SE + IT)">
             <ul className="list-disc pl-5 space-y-1">
-              <li>Next.js/Node, Python, SQL; testing & CI (Playwright)</li>
-              <li>Containerization (Docker), Vercel, basic AWS/Azure</li>
-              <li>Interactive demos (Streamlit/Next + API routes)</li>
-              <li>Perf profiling and budgets</li>
+              <li>Algorithms &amp; data structures; systems design basics</li>
+              <li>Next.js/Node, Python; REST APIs; SQL/Postgres data modeling</li>
+              <li>Testing/CI (Playwright/Vitest), CI/CD (GitHub Actions)</li>
+              <li>Linux &amp; networking fundamentals; Docker; Vercel/AWS; IAM basics</li>
             </ul>
           </Card>
 
-          <Card title="Clinical & Data">
+          <Card title="Clinical &amp; Data">
             <ul className="list-disc pl-5 space-y-1">
-              <li>Triage framing & clinical risk communication</li>
+              <li>Triage framing &amp; clinical risk communication</li>
               <li>De-ID workflows, dataset documentation</li>
               <li>Clinical data interpretation (labs, symptoms, history)</li>
               <li>Stanford AI in Healthcare (full specialization)</li>
             </ul>
           </Card>
 
-          <Card title="Wet Lab & Bio">
+          <Card title="Wet Lab &amp; Bio (Medical Microbiology)">
             <ul className="list-disc pl-5 space-y-1">
+              <li>PCR/qPCR &amp; microbial diagnostics; aseptic technique (BSL-2)</li>
               <li>Culture optimization; microscopy</li>
               <li>Western blot, ELISA, SDS-PAGE, flow cytometry</li>
-              <li>Assays for ER-stress & mitochondrial dysfunction</li>
-              <li>Pathogen work: <em>N. fowleri</em> (ER-stress, media)</li>
+              <li>ER-stress &amp; mitochondrial assays; <em>N. fowleri</em> media work</li>
             </ul>
           </Card>
         </div>
@@ -96,13 +96,13 @@ export default function AboutPage() {
           </li>
           <li>
             <span className="font-medium">Montenegro’s Medium</span> — low-cost culture medium with ≈3–5× growth
-            for <em>N. fowleri</em>; ER-stress & mitochondrial assays.
+            for <em>N. fowleri</em>; ER-stress &amp; mitochondrial assays.
           </li>
         </ul>
       </section>
 
       <section className="space-y-2">
-        <h2 className="text-2xl font-semibold tracking-tight">Ethics & Safety</h2>
+        <h2 className="text-2xl font-semibold tracking-tight">Ethics &amp; Safety</h2>
         <p className="text-neutral-700 dark:text-neutral-300">
           Demos are non-clinical. I document limitations, avoid automation bias, surface uncertainty,
           and show calibration/utility trade-offs. Models use conservative thresholds when appropriate.
