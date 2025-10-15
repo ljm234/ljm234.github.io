@@ -1,44 +1,55 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
+
+const NAV = [
+  { href: "/about", label: "About" },
+  { href: "/research", label: "Research" },
+  { href: "/playground", label: "Playground" },
+  { href: "/publications", label: "Publications" },
+  { href: "/collaborations", label: "Collaborations" },
+  { href: "/perf", label: "Perf" },
+  { href: "/contact", label: "Contact" },
+];
 
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
-  const firstLinkRef = useRef(null);
 
-  // Close on ESC
+  // Lock scroll when menu is open
   useEffect(() => {
-    function onKey(e) {
-      if (e.key === "Escape") setOpen(false);
-    }
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, []);
-
-  // Focus first link when opening
-  useEffect(() => {
-    if (open && firstLinkRef.current) {
-      firstLinkRef.current.focus();
+    if (open) {
+      const prev = document.documentElement.style.overflow;
+      document.documentElement.style.overflow = "hidden";
+      return () => (document.documentElement.style.overflow = prev);
     }
   }, [open]);
 
+  // Close on ESC
+  const onKeyDown = useCallback((e) => {
+    if (e.key === "Escape") setOpen(false);
+  }, []);
+  useEffect(() => {
+    if (!open) return;
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [open, onKeyDown]);
+
   return (
-    <header className="border-b border-neutral-200/60 dark:border-neutral-800 sticky top-0 z-40 bg-white/80 dark:bg-neutral-950/80 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-neutral-200/60 dark:border-neutral-800 bg-white/80 dark:bg-neutral-950/80 backdrop-blur">
       <div className="mx-auto max-w-7xl px-4 h-14 flex items-center justify-between">
-        {/* Brand */}
-        <a href="/" className="font-semibold tracking-tight whitespace-nowrap">
-          Jordan Montenegro
-        </a>
+        <a href="/" className="font-semibold tracking-tight">Jordan Montenegro</a>
 
         {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-5 text-sm">
-          <NavLink href="/about" label="About" />
-          <NavLink href="/research" label="Research" />
-          <NavLink href="/playground" label="Playground" />
-          <NavLink href="/publications" label="Publications" />
-          <NavLink href="/collaborations" label="Collaborations" />
-          <NavLink href="/perf" label="Perf" />
-          <NavLink href="/contact" label="Contact" />
+        <nav className="hidden md:flex items-center gap-6">
+          {NAV.map((i) => (
+            <a
+              key={i.href}
+              href={i.href}
+              className="hover:underline focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 rounded"
+            >
+              {i.label}
+            </a>
+          ))}
           <ThemeToggle />
         </nav>
 
@@ -46,57 +57,49 @@ export default function SiteHeader() {
         <div className="md:hidden flex items-center gap-2">
           <ThemeToggle />
           <button
-            aria-label="Open menu"
-            aria-controls="mobile-menu"
-            aria-expanded={open}
             onClick={() => setOpen(true)}
-            className="rounded border border-neutral-300 dark:border-neutral-700 px-3 py-1 text-sm"
+            className="inline-flex items-center rounded border px-3 py-1 text-sm"
+            aria-expanded={open}
+            aria-controls="mobile-menu"
           >
             Menu
           </button>
         </div>
       </div>
 
-      {/* Mobile drawer */}
+      {/* Mobile overlay menu */}
       {open && (
-        <div className="fixed inset-0 z-50">
-          {/* Overlay */}
-          <button
-            aria-label="Close menu"
-            className="absolute inset-0 bg-black/40"
-            onClick={() => setOpen(false)}
-          />
-          {/* Panel */}
-          <div
-            id="mobile-menu"
-            role="dialog"
-            aria-modal="true"
-            className="absolute right-0 top-0 h-full w-[80%] max-w-sm bg-white dark:bg-neutral-950 border-l border-neutral-200 dark:border-neutral-800 shadow-xl p-4 flex flex-col"
-          >
-            <div className="flex items-center justify-between mb-4">
-              <div className="font-semibold">Menu</div>
+        <div
+          id="mobile-menu"
+          role="dialog"
+          aria-modal="true"
+          className="fixed inset-0 z-50 bg-white/95 dark:bg-neutral-950/95 backdrop-blur-sm"
+        >
+          <div className="mx-auto max-w-7xl px-4">
+            <div className="h-14 flex items-center justify-between">
+              <div className="text-lg font-semibold">Menu</div>
               <button
-                className="rounded border px-3 py-1 text-sm"
                 onClick={() => setOpen(false)}
-                aria-label="Close menu"
+                className="rounded border px-3 py-1 text-sm"
+                autoFocus
               >
                 Close
               </button>
             </div>
 
-            <div className="flex flex-col gap-2 text-sm">
-              <NavLink href="/about" label="About" refEl={firstLinkRef} onClick={() => setOpen(false)} />
-              <NavLink href="/research" label="Research" onClick={() => setOpen(false)} />
-              <NavLink href="/playground" label="Playground" onClick={() => setOpen(false)} />
-              <NavLink href="/publications" label="Publications" onClick={() => setOpen(false)} />
-              <NavLink href="/collaborations" label="Collaborations" onClick={() => setOpen(false)} />
-              <NavLink href="/perf" label="Perf" onClick={() => setOpen(false)} />
-              <NavLink href="/contact" label="Contact" onClick={() => setOpen(false)} />
-            </div>
-
-            <div className="mt-auto pt-4 text-xs text-neutral-500">
-              © {new Date().getFullYear()} Jordan Montenegro
-            </div>
+            <ul className="mt-4 space-y-3 text-lg">
+              {NAV.map((i) => (
+                <li key={i.href}>
+                  <a
+                    href={i.href}
+                    className="block rounded border px-4 py-2 hover:bg-neutral-50 dark:hover:bg-neutral-900"
+                    onClick={() => setOpen(false)}
+                  >
+                    {i.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       )}
@@ -104,33 +107,23 @@ export default function SiteHeader() {
   );
 }
 
-function NavLink({ href, label, onClick, refEl }) {
-  return (
-    <a
-      href={href}
-      onClick={onClick}
-      ref={refEl || null}
-      className="hover:underline focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 rounded"
-    >
-      {label}
-    </a>
-  );
-}
-
 function ThemeToggle() {
+  // Minimal, non-intrusive theme toggle (no external deps)
+  const [dark, setDark] = useState(false);
+  useEffect(() => {
+    const isDark = document.documentElement.classList.contains("dark");
+    setDark(isDark);
+  }, []);
+  const toggle = () => {
+    document.documentElement.classList.toggle("dark");
+    setDark((d) => !d);
+    try {
+      localStorage.setItem("theme", !dark ? "dark" : "light");
+    } catch {}
+  };
   return (
-    <button
-      className="rounded border border-neutral-300 dark:border-neutral-700 px-3 py-1 text-sm"
-      onClick={() => {
-        const el = document.documentElement;
-        const dark = el.classList.toggle("dark");
-        try {
-          localStorage.setItem("theme", dark ? "dark" : "light");
-        } catch {}
-      }}
-      aria-label="Toggle color theme"
-    >
-      Theme
+    <button onClick={toggle} className="rounded border px-3 py-1 text-sm">
+      {dark ? "Dark" : "Theme"}
     </button>
   );
 }
