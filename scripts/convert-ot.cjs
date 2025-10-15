@@ -1,47 +1,36 @@
-// Convert all OT .tiff images to .png with the exact slugs our site uses.
-// Run with: node scripts/convert-ot.cjs
-const fs   = require('node:fs');
-const path = require('node:path');
-const sharp = require('sharp');
+import fs from "node:fs/promises";
+import path from "node:path";
+import sharp from "sharp";
 
-const IN_DIR  = path.join(process.cwd(), 'public', 'research', 'ot');
-const OUT_DIR = IN_DIR; // write PNGs next to originals
+const srcDir = path.join(process.cwd(), "public", "research", "ot");
 
-const plan = [
-  // LDH 24 h
-  ["24h_LDH_HeLa+Nf_Plate1_percent.tiff", "ldh-hela-nf-24h-plate1-percent.png"],
-  ["24h_LDH_HeLa+Nf_Plate2_raw.tiff",     "ldh-hela-nf-24h-plate2-raw.png"],
-  ["24h_LDH_Nf-only_Plate1_raw.tiff",     "ldh-nf-only-24h-plate1-raw.png"],
-  ["24h_LDH_Nf-only_Plate2_raw.tiff",     "ldh-nf-only-24h-plate2-raw.png"],
+// turn "24h_LDH_HeLa+Nf_Plate1_percent.tiff" -> "ldh-hela-nf-24h-plate1-percent.png"
+function toKebabPng(file) {
+  const base = file.replace(/\.tif?f$/i, "");
+  const pretty = base
+    .replace(/_/g, "-")
+    .replace(/\+/g, "plus")
+    .toLowerCase();
+  // move time token after assay for consistency
+  return pretty.endsWith("-percent") || pretty.endsWith("-raw")
+    ? pretty.replace(/^(\d+h)-(.*)$/i, "$2-$1") + ".png"
+    : pretty + ".png";
+}
 
-  // Caspase-3 48 h
-  ["48h_Caspase-3_HeLa+Nf_Plate1_percent.tiff", "caspase3-hela-nf-48h-plate1-percent.png"],
-  ["48h_Caspase-3_HeLa+Nf_Plate2_percent.tiff", "caspase3-hela-nf-48h-plate2-percent.png"],
-  ["48h_Caspase-3_Nf-only_Plate1_raw.tiff",     "caspase3-nf-only-48h-plate1-raw.png"],
-  ["48h_Caspase-3_Nf-only_Plate2_raw.tiff",     "caspase3-nf-only-48h-plate2-raw.png"],
+const options = { compressionLevel: 9, quality: 90 };
 
-  // JC-1 72 h
-  ["72h_JC-1_HeLa+Nf_Plate1_percent.tiff", "jc1-hela-nf-72h-plate1-percent.png"],
-  ["72h_JC-1_HeLa+Nf_Plate2_percent.tiff", "jc1-hela-nf-72h-plate2-percent.png"],
-  ["72h_JC-1_Nf-only_Plate1_percent.tiff", "jc1-nf-only-72h-plate1-percent.png"],
-  ["72h_JC-1_Nf-only_Plate2_raw.tiff",     "jc1-nf-only-72h-plate2-raw.png"],
-];
+const files = (await fs.readdir(srcDir)).filter((f) => /\.tif?f$/i.test(f));
+if (files.length === 0) {
+  console.log("No TIFF files found in:", srcDir);
+  process.exit(0);
+}
 
-(async () => {
-  try {
-    for (const [srcName, outName] of plan) {
-      const src = path.join(IN_DIR, srcName);
-      const out = path.join(OUT_DIR, outName);
-      if (!fs.existsSync(src)) {
-        console.warn('Missing:', srcName);
-        continue;
-      }
-      console.log('→', outName);
-      await sharp(src).png({ compressionLevel: 9, quality: 90 }).toFile(out);
-    }
-    console.log('Done.');
-  } catch (err) {
-    console.error(err);
-    process.exit(1);
-  }
-})();
+for (const f of files) {
+  const input = path.join(srcDir, f);
+  const output = path.join(srcDir, toKebabPng(f));
+  console.log("→", path.basename(output));
+  const buf = await fs.readFile(input);
+  await sharp(buf).png(options).toFile(output);
+}
+
+console.log("Done.");
