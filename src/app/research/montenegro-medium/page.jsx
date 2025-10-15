@@ -1,35 +1,152 @@
+import Image from "next/image";
+import MMPreview from "./MMPreview";
+
 export const metadata = {
   title: "Montenegro’s Medium (MM) — Jordan Montenegro",
-  description: "Serum-free, low-cost axenic medium enabling robust Naegleria fowleri growth.",
+  description:
+    "Serum-free, low-cost axenic medium enabling robust Naegleria fowleri growth with simple, reproducible passaging.",
 };
 
 export default function Page() {
+  // Data passed to the floating preview (all strings → serializable)
+  const figures = [
+    { src: "/research/mm/fig2-growth.png", alt: "Growth curve in MM (0–168 h)", caption: "Fig. 2 — Growth in MM" },
+    { src: "/research/mm/fig3-fresh-old.png", alt: "Fresh vs. old MM at 48 h and 72 h", caption: "Fig. 3 — Fresh vs. old MM" },
+    { src: "/research/mm/fig4-passage.png", alt: "Passage timing & method effects (TD3–TD5; DT vs CT)", caption: "Fig. 4 — Passage timing/method" },
+    { src: "/research/mm/day-0.png", alt: "Day 0 micrograph", caption: "Day 0" },
+    { src: "/research/mm/day-3.png", alt: "Day 3 micrograph", caption: "Day 3" },
+    { src: "/research/mm/day-7.png", alt: "Day 7 micrograph", caption: "Day 7" },
+    { src: "/research/mm/day-10.png", alt: "Day 10 micrograph", caption: "Day 10" },
+  ];
+
   return (
-    <div className="space-y-6">
-      <h1 className="text-3xl font-bold tracking-tight">Montenegro’s Medium (MM)</h1>
+    <div className="space-y-10">
+      <header className="space-y-2">
+        <h1 className="text-3xl font-bold tracking-tight">Montenegro’s Medium (MM)</h1>
+        <p className="text-neutral-700 dark:text-neutral-300 max-w-3xl">
+          A simple <strong>serum-free, low-cost</strong> axenic medium that supports robust{" "}
+          <em>Naegleria fowleri</em> growth and routine passaging. Mean density rose from
+          2.05×10<sup>5</sup> to 1.72×10<sup>7</sup> cells·mL⁻¹ over 168 h with an overall doubling time ≈ 28 h;
+          early windows were faster (≈12 h at 0–24 h; ≈9 h at 24–48 h). Fresh batches outperformed 30–35-day batches,
+          and a simple <strong>TD3 direct transfer (DT)</strong> matched or beat centrifuge transfer at scale.
+        </p>
+      </header>
 
-      <p className="text-neutral-700 dark:text-neutral-300">
-        A simple <strong>serum-free, low-cost</strong> axenic medium that supports robust{" "}
-        <em>Naegleria fowleri</em> growth and routine passaging. Mean density rose from
-        2.05×10<sup>5</sup> to 1.72×10<sup>7</sup> cells·mL⁻¹ over 168 h with an overall
-        doubling time ≈ 28 h; early windows were faster (≈12 h at 0–24 h; ≈9 h at 24–48 h).
-        Fresh batches outperformed 30–35-day batches at 48 h (~1.55×) and 72 h (~2.77×);
-        direct transfer at Day 3 (TD3) matched or beat centrifuge transfer and is the simplest default.
-      </p>
+      {/* Key findings as a compact “evidence table” */}
+      <section className="rounded-2xl border p-6">
+        <h2 className="text-xl font-semibold mb-4">Key findings (evidence summary)</h2>
+        <div className="grid md:grid-cols-2 gap-4 text-sm">
+          <div className="rounded-lg border p-4">
+            <div className="font-medium">Growth & doubling</div>
+            <ul className="list-disc pl-5 mt-2 space-y-1">
+              <li>Final density ≈ 1.72×10<sup>7</sup> cells·mL⁻¹ at 168 h</li>
+              <li>Overall doubling ≈ 28 h; early windows 9–12 h</li>
+            </ul>
+          </div>
+          <div className="rounded-lg border p-4">
+            <div className="font-medium">Fresh vs. old medium</div>
+            <ul className="list-disc pl-5 mt-2 space-y-1">
+              <li>48 h: fresh ≈ 1.5× higher than 30–35 d</li>
+              <li>72 h: fresh ≈ 2.8× higher than 30–35 d</li>
+            </ul>
+          </div>
+          <div className="rounded-lg border p-4">
+            <div className="font-medium">Transfer method</div>
+            <ul className="list-disc pl-5 mt-2 space-y-1">
+              <li>TD3 direct transfer (DT) is simplest and competitive</li>
+              <li>DT avoids centrifuge (CT 3000×g, 5 min) equipment/time</li>
+            </ul>
+          </div>
+          <div className="rounded-lg border p-4">
+            <div className="font-medium">Practicalities</div>
+            <ul className="list-disc pl-5 mt-2 space-y-1">
+              <li>Common ingredients; no antibiotics needed</li>
+              <li>Low cost: ≈ $0.12–$0.36 / 100 mL</li>
+            </ul>
+          </div>
+        </div>
+      </section>
 
-      <ul className="list-disc pl-6">
-        <li>Common ingredients; no antibiotics; standard sterile technique.</li>
-        <li>Repeated subculture &gt;50 passages without loss of routine growth.</li>
-        <li>Approx. cost ≈ $0.12–$0.36 / 100 mL vs $8–$23 for serum formulas.</li>
-      </ul>
+      {/* Figures (static grid with captions) */}
+      <section className="space-y-4">
+        <h2 className="text-xl font-semibold">Figures</h2>
 
-      <div className="rounded-lg border p-4">
-        <div className="font-medium mb-2">Downloads</div>
-        <ul className="list-disc pl-6">
-          <li><a className="underline" href="/papers/montenegro-medium.docx">Manuscript (DOCX)</a></li>
-          <li><a className="underline" href="/downloads/Research-Summary.pdf">One-page summary</a></li>
+        <Figure
+          src="/research/mm/fig2-growth.png"
+          alt="Growth curve in Montenegro’s Medium"
+          caption="Fig. 2 — Growth in MM (0–168 h)."
+        />
+        <Figure
+          src="/research/mm/fig3-fresh-old.png"
+          alt="Fresh vs old medium at 48 h and 72 h"
+          caption="Fig. 3 — Fresh vs old MM at 48 h and 72 h."
+        />
+        <Figure
+          src="/research/mm/fig4-passage.png"
+          alt="Passage timing & method (TD3–TD5; DT vs CT)"
+          caption="Fig. 4 — Passage timing & method (TD3–TD5; DT vs CT)."
+        />
+
+        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
+          {[
+            { src: "/research/mm/day-0.png", caption: "Day 0" },
+            { src: "/research/mm/day-3.png", caption: "Day 3" },
+            { src: "/research/mm/day-7.png", caption: "Day 7" },
+            { src: "/research/mm/day-10.png", caption: "Day 10" },
+          ].map((f) => (
+            <figure key={f.src} className="rounded-xl border overflow-hidden">
+              <Image
+                src={f.src}
+                alt={f.caption}
+                width={1024}
+                height={768}
+                className="w-full h-auto object-cover"
+                sizes="(max-width: 768px) 50vw, 25vw"
+              />
+              <figcaption className="p-2 text-xs text-neutral-600 dark:text-neutral-400">
+                {f.caption}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+
+      {/* Downloads */}
+      <section className="rounded-2xl border p-6">
+        <h2 className="text-xl font-semibold">Downloads</h2>
+        <ul className="list-disc pl-6 mt-2">
+          <li>
+            <a className="underline" href="/papers/montenegro-medium.docx">Manuscript (DOCX)</a>
+          </li>
+          <li>
+            <a className="underline" href="/downloads/Research-Summary.pdf">One-page summary</a>
+          </li>
         </ul>
-      </div>
+      </section>
+
+      {/* Floating preview (button bottom-right → glass drawer + lightbox) */}
+      <MMPreview
+        abstract="Serum-free, low-cost axenic medium enabling robust Naegleria fowleri growth with fast early doubling (9–12 h) and simple TD3 direct transfer. Fresh batches outperform aged (30–35 d) medium at 48/72 h."
+        figures={figures}
+      />
     </div>
+  );
+}
+
+function Figure({ src, alt, caption }) {
+  return (
+    <figure className="rounded-xl border overflow-hidden">
+      <Image
+        src={src}
+        alt={alt}
+        width={1400}
+        height={900}
+        className="w-full h-auto object-contain bg-white dark:bg-neutral-950"
+        sizes="100vw"
+      />
+      <figcaption className="p-3 text-sm text-neutral-600 dark:text-neutral-400">
+        {caption}
+      </figcaption>
+    </figure>
   );
 }
