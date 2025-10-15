@@ -20,7 +20,7 @@ export default function PublicationsPage() {
       <ul className="space-y-4">
         <Pub
           title="Montenegro’s Medium (MM): a serum-free, low-cost axenic medium enabling robust Naegleria fowleri growth"
-          status="Manuscript in preparation"
+          status="Preprint in preparation"
           notes="Robust growth to 1.72×10⁷ cells·mL⁻¹ (168 h), overall doubling ≈28 h; fresh batches outperform older; TD3 direct transfer is simplest. :contentReference[oaicite:9]{index=9}"
           href="/papers/montenegro-medium.docx"
         />

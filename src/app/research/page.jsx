@@ -1,5 +1,4 @@
 import dynamic from "next/dynamic";
-
 const PreviewButton = dynamic(() => import("@/components/PreviewButton"), { ssr: false });
 
 export const metadata = {
@@ -33,8 +32,17 @@ const items = [
   {
     slug: "organelle-targets",
     title: "Organelle-Target Discovery for Selective Amoebicidal Therapy",
-    desc: "Open medium + 96-well screens (LDH 24h, caspase-3 48h, JC-1 72h) nominate ER/COPII and ER–mitochondria Ca²⁺ coupling.",
+    desc: "96-well LDH/Caspase-3/JC-1 screens nominate ER/COPII and ER–mitochondria Ca²⁺ coupling.",
     tags: ["Mechanism", "Screening"],
+    preview: {
+      abstract:
+        "Paired HeLa+Nf and Nf-only plates across LDH (24h), Caspase-3 (48h), JC-1 (72h) reveal selective organelle vulnerabilities.",
+      figures: [
+        { src: "/research/ot/ldh-hela-nf-24h-plate1-percent.png", caption: "LDH 24h HeLa+Nf" },
+        { src: "/research/ot/caspase3-hela-nf-48h-plate2-percent.png", caption: "Caspase-3 48h HeLa+Nf" },
+        { src: "/research/ot/jc1-hela-nf-72h-plate1-percent.png", caption: "JC-1 72h HeLa+Nf" },
+      ],
+    },
   },
 ];
 
@@ -52,7 +60,7 @@ export default function ResearchPage() {
                 <span key={t} className="text-xs rounded border px-2 py-0.5">{t}</span>
               ))}
             </div>
-            <div className="mt-3 flex items-center">
+            <div className="mt-3 flex items-center gap-4">
               <a className="underline" href={`/research/${p.slug}`}>Open project →</a>
               {p.preview && (
                 <PreviewButton label="Quick Preview" abstract={p.preview.abstract} items={p.preview.figures} />
