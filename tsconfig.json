@@ -27,7 +27,8 @@
         "name": "next"
       }
     ],
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "types": []
   },
   "include": [
     "next-env.d.ts",
