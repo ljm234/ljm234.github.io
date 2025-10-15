@@ -1,19 +1,47 @@
-import { projects } from "@/content/projects";
+export const metadata = {
+  title: "Research — Jordan Montenegro",
+  description: "Clinical ML + microbiology projects.",
+};
 
-export default function Research() {
+const items = [
+  {
+    slug: "amoebanator",
+    title: "Amoebanator: Early PAM Triage CDS",
+    desc: "Risk model with calibration, decision-curve analysis, and explainability.",
+    tags: ["Clinical ML", "CDS", "Calibration"],
+  },
+  {
+    slug: "montenegro-medium",
+    title: "Montenegro’s Medium (MM)",
+    desc: "Serum-free, low-cost axenic medium enabling robust Naegleria fowleri growth.",
+    tags: ["Wet Lab", "Optimization"],
+  },
+  {
+    slug: "organelle-targets",
+    title: "Organelle-Target Discovery for Selective Amoebicidal Therapy",
+    desc: "Open medium + 96-well screens (LDH 24h, caspase-3 48h, JC-1 72h) nominate ER/COPII and ER–mitochondria Ca²⁺ coupling.",
+    tags: ["Mechanism", "Screening"],
+  },
+];
+
+export default function ResearchPage() {
   return (
-    <div>
-      <h1 className="text-3xl font-bold tracking-tight mb-6">Research</h1>
-      <div className="grid md:grid-cols-3 gap-6">
-        {projects.map(p => (
-          <a key={p.slug} href={`/research/${p.slug}`} className="rounded-lg border p-4 hover:bg-neutral-50 dark:hover:bg-neutral-900">
-            <div className="font-semibold">{p.title}</div>
-            <div className="text-sm text-neutral-500 mt-1">{p.summary}</div>
-            <div className="mt-2 flex flex-wrap gap-2">
-              {p.tags.map(t => <span key={t} className="text-xs border rounded px-2 py-0.5">{t}</span>)}
+    <div className="space-y-8">
+      <h1 className="text-4xl font-bold tracking-tight">Research</h1>
+      <div className="space-y-6">
+        {items.map((p) => (
+          <article key={p.slug} className="rounded-2xl border p-6">
+            <h2 className="text-xl font-semibold">{p.title}</h2>
+            <p className="mt-2 text-neutral-600 dark:text-neutral-300">{p.desc}</p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {p.tags.map((t) => (
+                <span key={t} className="text-xs rounded border px-2 py-0.5">{t}</span>
+              ))}
             </div>
-            <div className="text-xs mt-3 underline">Open project →</div>
-          </a>
+            <a className="mt-3 inline-block underline" href={`/research/${p.slug}`}>
+              Open project →
+            </a>
+          </article>
         ))}
       </div>
     </div>
