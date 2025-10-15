@@ -1,152 +1,123 @@
+// src/app/perf/page.jsx
 export const metadata = {
   title: "Performance & Reliability — Jordan Montenegro",
   description:
-    "Runtime choices, budgets, testing, and the kind of evidence I keep for production hygiene.",
+    "Stack, budgets, production Lighthouse scores, and automated test status.",
 };
 
-export default function PerfPage() {
+function Stat({ label, value }) {
   return (
-    <div className="mx-auto max-w-7xl px-4 py-10 space-y-10">
-      <header className="space-y-3">
-        <h1 className="text-4xl font-bold tracking-tight">Performance & Reliability</h1>
-        <p className="text-neutral-700 dark:text-neutral-300 max-w-3xl">
-          Small apps should feel quick and predictable. Here’s how I keep this site tidy
-          and what I watch when building clinical demos.
-        </p>
-      </header>
-
-      {/* Runtime & Build */}
-      <section className="grid gap-6 md:grid-cols-2">
-        <Card title="Runtime & Build">
-          <List
-            items={[
-              "Next.js (App Router) + TailwindCSS.",
-              "Images through next/image (optimized, responsive).",
-              "CI runs lint, unit tests (Vitest), and e2e (Playwright).",
-              "Accessibility checks: keyboard nav, skip-nav, and contrast.",
-            ]}
-          />
-        </Card>
-
-        <Card title="Budgets (home & playground)">
-          <List
-            items={[
-              "Largest Contentful Paint under ~2.5 s on a typical laptop.",
-              "Cumulative Layout Shift under 0.1.",
-              "Initial JavaScript around 180 kB for the first view.",
-              "Interactions respond in under 200 ms in the playground.",
-            ]}
-          />
-        </Card>
-      </section>
-
-      {/* Lighthouse snapshot */}
-      <section className="grid gap-6 md:grid-cols-2">
-        <Card title="Lighthouse (production)">
-          <DL
-            groups={[
-              {
-                label: "Home",
-                rows: [
-                  ["Performance", "98"],
-                  ["Accessibility", "100"],
-                  ["Best Practices", "100"],
-                  ["SEO", "100"],
-                ],
-              },
-              {
-                label: "Playground",
-                rows: [
-                  ["Performance", "96"],
-                  ["Accessibility", "100"],
-                  ["Best Practices", "100"],
-                  ["SEO", "100"],
-                ],
-              },
-            ]}
-            footnote="Recorded on 2025-10-15 (Chrome desktop)."
-          />
-        </Card>
-
-        <Card title="Test status">
-          <List
-            items={[
-              "Unit (Vitest): core utilities pass.",
-              "E2E (Playwright): smoke paths—navigation, theme toggle, preview drawer.",
-              "GitHub Actions: build + tests green on main before deploy.",
-            ]}
-          />
-          <div className="mt-4">
-            <a
-              href="https://github.com"
-              className="underline text-sm"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              View the latest CI run →
-            </a>
-          </div>
-        </Card>
-      </section>
-
-      {/* Notes to future self */}
-      <section>
-        <Card title="Notes">
-          <List
-            items={[
-              "Prefer readable code and small components over clever abstractions.",
-              "If a chart or figure can’t be explained in two sentences, rewrite it.",
-              "Ship fewer features with better calibration and clearer limits.",
-            ]}
-          />
-        </Card>
-      </section>
+    <div className="rounded-lg border px-4 py-3 text-center">
+      <div className="text-3xl font-semibold leading-none">{value}</div>
+      <div className="mt-1 text-sm text-neutral-600 dark:text-neutral-300">
+        {label}
+      </div>
     </div>
   );
 }
 
-/* ————— Helpers ————— */
-
-function Card({ title, children }) {
+function StatGroup({ title, stats }) {
   return (
     <section className="rounded-2xl border p-6">
-      <h2 className="text-xl font-semibold">{title}</h2>
-      <div className="mt-3">{children}</div>
+      <h3 className="text-lg font-semibold">{title}</h3>
+      <dl className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        {stats.map((s) => (
+          <div key={s.label}>
+            <Stat label={s.label} value={s.value} />
+          </div>
+        ))}
+      </dl>
     </section>
   );
 }
 
-function List({ items }) {
-  return (
-    <ul className="space-y-2">
-      {items.map((t) => (
-        <li key={t} className="leading-relaxed text-neutral-700 dark:text-neutral-300">
-          {t}
-        </li>
-      ))}
-    </ul>
-  );
-}
+export default function PerfPage() {
+  const recorded = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
 
-function DL({ groups, footnote }) {
   return (
-    <div className="space-y-6">
-      {groups.map((g) => (
-        <div key={g.label}>
-          <div className="font-medium mb-2">{g.label}</div>
-          <dl className="grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-1">
-            {g.rows.map(([k, v]) => (
-              <div key={k} className="flex items-center justify-between rounded border px-3 py-2">
-                <dt className="text-sm text-neutral-600 dark:text-neutral-400">{k}</dt>
-                <dd className="font-semibold">{v}</dd>
-              </div>
-            ))}
-          </dl>
+    <div className="space-y-8">
+      <h1 className="text-4xl font-bold tracking-tight">
+        Performance & Reliability
+      </h1>
+
+      {/* Runtime & Build */}
+      <section className="grid gap-6 lg:grid-cols-2">
+        <div className="rounded-2xl border p-6">
+          <h2 className="text-lg font-semibold">Runtime & Build</h2>
+          <ul className="mt-3 list-disc space-y-2 pl-5">
+            <li>Next.js (App Router) + TailwindCSS.</li>
+            <li>Images via <code>next/image</code> (optimized & responsive).</li>
+            <li>CI: lint, unit tests (Vitest), and e2e (Playwright).</li>
+            <li>Accessibility: keyboard nav, skip-nav, contrast checks.</li>
+          </ul>
         </div>
-      ))}
-      {footnote && (
-        <p className="text-sm text-neutral-500 dark:text-neutral-400">{footnote}</p>
-      )}
+
+        <div className="rounded-2xl border p-6">
+          <h2 className="text-lg font-semibold">Budgets (home & playground)</h2>
+          <ul className="mt-3 list-disc space-y-2 pl-5">
+            <li>LCP ≲ 2.5 s on a typical laptop.</li>
+            <li>CLS &lt; 0.1 (no unexpected layout movement).</li>
+            <li>Initial JavaScript ≈ 180 kB for first view.</li>
+            <li>Interactions respond in &lt; 200 ms in the playground.</li>
+          </ul>
+        </div>
+      </section>
+
+      {/* Lighthouse (Production) */}
+      <section className="grid gap-6 lg:grid-cols-2">
+        <div className="rounded-2xl border p-6">
+          <h2 className="text-lg font-semibold">Lighthouse (Production)</h2>
+
+          <div className="mt-4 space-y-5">
+            <StatGroup
+              title="Home"
+              stats={[
+                { label: "Performance", value: "98" },
+                { label: "Accessibility", value: "100" },
+                { label: "Best Practices", value: "100" },
+                { label: "SEO", value: "100" },
+              ]}
+            />
+            <StatGroup
+              title="Playground"
+              stats={[
+                { label: "Performance", value: "96" },
+                { label: "Accessibility", value: "100" },
+                { label: "Best Practices", value: "100" },
+                { label: "SEO", value: "100" },
+              ]}
+            />
+            <p className="text-sm text-neutral-600 dark:text-neutral-400">
+              Recorded on {recorded} (Chrome desktop).
+            </p>
+          </div>
+        </div>
+
+        {/* Test status */}
+        <div className="rounded-2xl border p-6">
+          <h2 className="text-lg font-semibold">Test status</h2>
+          <ul className="mt-3 list-disc space-y-2 pl-5">
+            <li>
+              <strong>Unit (Vitest)</strong>: core utilities pass.
+            </li>
+            <li>
+              <strong>E2E (Playwright)</strong>: smoke paths—navigation, theme
+              toggle, preview drawer.
+            </li>
+            <li>
+              <strong>CI</strong>: GitHub Actions runs build + tests on{" "}
+              <code>main</code> before deploy.
+            </li>
+          </ul>
+          <a
+            className="mt-3 inline-block underline"
+            href="https://github.com/jordanmontenegro/cs-220-portfolio-v3-ljm234/actions"
+            rel="noopener noreferrer"
+          >
+            View the latest CI run →
+          </a>
+        </div>
+      </section>
     </div>
   );
 }

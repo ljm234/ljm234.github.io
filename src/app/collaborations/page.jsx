@@ -10,7 +10,7 @@ export default function CollaborationsPage() {
       <header className="space-y-3">
         <h1 className="text-4xl font-bold tracking-tight">Collaborations</h1>
         <p className="text-neutral-700 dark:text-neutral-300 max-w-3xl">
-          I build ML tools and research software for real workflows. If your team is
+          I build AI/ML tools and research software for real workflows. If your team is
           exploring calibrated risk models, simple decision support, or wet-lab
           experiments that pair clean readouts with honest analysis, we’ll get along.
         </p>
