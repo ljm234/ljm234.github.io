@@ -1,5 +1,15 @@
 import "./globals.css";
 import SiteHeader from "@/components/layout/SiteHeader";
+import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
+const sans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  weight: ["200", "300", "400", "500", "600", "700", "800"],
+});
+const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
+
+import ViewTransitions from "@/components/effects/ViewTransitions";
+import TopProgress from "@/components/effects/TopProgress";
 
 export const metadata = {
   metadataBase: new URL("https://cs-220-portfolio-v3-ljm234.vercel.app"),
@@ -26,7 +36,6 @@ export const metadata = {
   alternates: { canonical: "/" },
 };
 
-// Move themeColor to viewport to silence Next.js warnings
 export const viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
@@ -36,19 +45,46 @@ export const viewport = {
   initialScale: 1,
 };
 
+const THEME_INIT = `
+try {
+  var s = localStorage.getItem('theme');
+  var mode = s ? s : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  var root = document.documentElement;
+  if (mode === 'dark') root.classList.add('dark'); else root.classList.remove('dark');
+} catch (e) {}
+`;
+
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className="min-h-screen bg-white text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100">
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 bg-yellow-300 text-black px-3 py-1 rounded"
-        >
-          Skip to content
-        </a>
+    <html
+      lang="en"
+      className={`${sans.variable} ${mono.variable} scroll-smooth`}
+      suppressHydrationWarning
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT }} />
+        <style id="prepaint">{`html{color-scheme: light dark}
+@media (prefers-color-scheme: dark){html{background:#0a0a0a}}
+@media (prefers-color-scheme: light){html{background:#ffffff}}
+`}</style>
 
-        {/* Sticky header with high z-index so it sits above content */}
+        {/* View Transitions keyframes (native, graceful fallback) */}
+        <style>{`
+:root::view-transition-old(root), :root::view-transition-new(root) {
+  animation-duration: 180ms;
+  animation-timing-function: cubic-bezier(.2,.8,.2,1);
+}
+`}</style>
+      </head>
+      <body className="min-h-screen bg-white text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100">
+        {/* thin top progress bar for long pages */}
+        <TopProgress />
+
+        {/* Sticky header */}
         <SiteHeader />
+
+        {/* View transitions listener (no UI) */}
+        <ViewTransitions />
 
         <main id="main" className="mx-auto max-w-7xl px-4 py-10">
           {children}

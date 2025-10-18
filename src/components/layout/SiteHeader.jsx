@@ -6,6 +6,7 @@ import { createPortal } from "react-dom";
 const NAV = [
   { href: "/about", label: "About" },
   { href: "/research", label: "Research" },
+  { href: "/services", label: "Services" },      // ← NEW
   { href: "/playground", label: "Playground" },
   { href: "/publications", label: "Publications" },
   { href: "/collaborations", label: "Collaborations" },
@@ -43,7 +44,6 @@ export default function SiteHeader() {
     <header className="sticky top-0 z-40 border-b border-neutral-200/60 dark:border-neutral-800 bg-white/80 dark:bg-neutral-950/80 backdrop-blur">
       <div className="mx-auto max-w-7xl px-4 h-14 flex items-center justify-between">
         <a href="/" className="font-semibold tracking-tight flex items-center gap-2">
-          {/* optional mark: <img src="/jm-mark.svg" alt="" className="h-5 w-5" /> */}
           Jordan Montenegro
         </a>
 

@@ -2,4 +2,108 @@
 @tailwind components;
 @tailwind utilities;
 
-html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+/* ---------------------------
+   Design tokens & base
+---------------------------- */
+@layer base {
+  :root {
+    --font-sans: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+
+    --bg: 0 0% 100%;
+    --fg: 222 47% 11%;
+    --card: 0 0% 100%;
+    --border: 214 32% 91%;
+
+    /* premium accents (violet → cyan) */
+    --accent-violet: 262 83% 58%;
+    --accent-cyan: 188 94% 42%;
+  }
+  .dark {
+    --bg: 222 47% 11%;
+    --fg: 210 40% 98%;
+    --card: 222 47% 12%;
+    --border: 222 47% 20%;
+  }
+
+  html { color-scheme: light dark; }
+  body {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* layout safety */
+  *, *::before, *::after { box-sizing: border-box; }
+  .flex > * { min-width: 0; }
+  .grid > * { min-width: 0; }
+  img, video, canvas, svg { max-width: 100%; height: auto; }
+  table { display: block; max-width: 100%; overflow-x: auto; }
+  pre, code { white-space: pre-wrap; word-break: break-word; font-family: var(--font-mono); }
+}
+
+/* Utilities */
+@layer utilities {
+  .bg-accent-gradient {
+    background-image: linear-gradient(90deg, hsl(var(--accent-violet)), hsl(var(--accent-cyan)));
+  }
+  .text-gradient {
+    background: linear-gradient(90deg, hsl(var(--accent-violet)), hsl(var(--accent-cyan)));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+/* Respect reduced motion globally */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+}
+
+/* Top progress bar */
+#top-progress {
+  position: fixed; left: 0; top: 0; height: 2px; z-index: 60;
+  background-image: linear-gradient(90deg, hsl(var(--accent-violet)), hsl(var(--accent-cyan)));
+  transform-origin: left center;
+}
+
+/* ---------------------------
+   Marquee carousel (seamless)
+---------------------------- */
+.marquee { /* wrapper */ }
+.marquee-track {
+  display: flex;
+  gap: 1.5rem;       /* matches gap-6 */
+  width: max-content;
+  animation: marquee-scroll var(--dur, 28s) linear infinite;
+  will-change: transform;
+}
+@keyframes marquee-scroll {
+  0%   { transform: translate3d(0,0,0); }
+  100% { transform: translate3d(-50%,0,0); } /* moves by half of duplicated track */
+}
+/* Pause on interaction */
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track,
+.marquee:active .marquee-track { animation-play-state: paused; }
+
+/* Reduced motion: stop marquee */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none !important; }
+}
+/* Hero entrance (slower, smooth) */
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-hero {
+  animation: heroFadeUp 1.6s cubic-bezier(.22,.61,.36,1) both;
+}
+
+@layer utilities {
+  @keyframes heroFadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .animate-hero { animation: heroFadeUp 1.6s cubic-bezier(.22,.61,.36,1) both; }
+}

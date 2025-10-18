@@ -1,21 +1,53 @@
 [
   {
-    "title": "Amoebanator: Early PAM triage with calibrated risk",
-    "authors": "Montenegro J., et al.",
-    "status": "preprint (in preparation)",
+    "id": "amoebanator-2024",
+    "title": "Amoebanator: Early Risk Triage with Calibration, Decision Curves, and Transparent Thresholds",
+    "authors": ["J. Montenegro", "Collaborators"],
+    "venue": "Preprint",
+    "year": 2024,
+    "topic": "ML",
+    "tags": ["clinical ML", "calibration", "decision curves", "explainability"],
+    "abstract": "We present a lightweight, well-documented clinical ML prototype that emphasizes calibrated risk, transparent thresholds via net benefit, and a reproducibility stack (model card, dataset card, and interactive demo).",
+    "contributions": [
+      "Conformal-style safety control of false negatives during threshold selection",
+      "Decision-curve driven tuning for pragmatic operating points",
+      "Full reproducibility: interactive demo, model card, dataset card"
+    ]
+  },
+  {
+    "id": "montenegro-medium-2025",
+    "title": "Montenegro’s Medium: Low-cost Culture Formulation Achieving 3–5× Growth for Naegleria fowleri",
+    "authors": ["J. Montenegro"],
+    "venue": "Preprint",
     "year": 2025,
+    "topic": "Microbiology",
+    "tags": ["growth media", "low-cost", "lab methods"],
+    "abstract": "A practical formulation and workflow that increases growth yield 3–5× while reducing consumable cost, enabling broader access to experimental work.",
+    "contributions": [
+      "3–5× growth in bench tests vs. baseline",
+      "Cost-aware formulation and sourcing notes",
+      "Reproducible protocol with QC checkpoints"
+    ],
     "links": {
-      "code": "I will add it later :)",
-      "figures": "/downloads/amoebanator-figs.zip"
+      "pdf": "public/papers/montenegro-medium.docx"
     }
   },
   {
-    "title": "Montenegro’s Medium: a low-cost culture optimization for Naegleria fowleri",
-    "authors": "Montenegro J., et al.",
-    "status": "methods note (in preparation)",
+    "id": "organelle-target-2025",
+    "title": "Organelle-Target Discovery: Drug Response Signatures and Mitochondrial Dysfunction Assays",
+    "authors": ["J. Montenegro", "Team"],
+    "venue": "Preprint",
     "year": 2025,
+    "topic": "Clinical",
+    "tags": ["assays", "signatures", "mitochondria"],
+    "abstract": "Exploration of organelle-level drug response with bench assays and analysis pipelines to surface candidate targets.",
+    "contributions": [
+      "Assay design and QC for organelle-level readouts",
+      "Signature extraction pipeline with clear documentation",
+      "Hypothesis-generating leads for follow-up experiments"
+    ],
     "links": {
-      "figures": "I will add it later :)"
+      "pdf": "public/papers/organelle-targets.docx"
     }
   }
 ]

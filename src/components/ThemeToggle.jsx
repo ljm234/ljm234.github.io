@@ -2,48 +2,42 @@
 
 import { useEffect, useState } from "react";
 
+function getStoredTheme() {
+  if (typeof window === "undefined") return "light";
+  const stored = localStorage.getItem("theme");
+  if (stored === "light" || stored === "dark") return stored;
+
+  const prefersDark =
+    window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches;
+  return prefersDark ? "dark" : "light";
+}
+
+function applyTheme(mode) {
+  const root = document.documentElement;
+  root.classList.toggle("dark", mode === "dark");
+}
+
 export default function ThemeToggle() {
-  const [mounted, setMounted] = useState(false);
-  const [dark, setDark] = useState(false);
+  const [mode, setMode] = useState(() => getStoredTheme());
 
   useEffect(() => {
-    setMounted(true);
+    applyTheme(mode);
     try {
-      const stored = localStorage.getItem("theme");
-      const isDark = stored ? stored === "dark" : false;
-      setDark(isDark);
-      document.documentElement.classList.toggle("dark", isDark);
-    } catch {}
-  }, []);
-
-  function toggle() {
-    const next = !dark;
-    setDark(next);
-    try {
-      localStorage.setItem("theme", next ? "dark" : "light");
-    } catch {}
-    document.documentElement.classList.toggle("dark", next);
-  }
-
-  if (!mounted) {
-    return (
-      <button
-        className="rounded border border-neutral-300 dark:border-neutral-700 px-2 py-1 text-sm opacity-50"
-        aria-label="Toggle color theme"
-        disabled
-      >
-        Theme
-      </button>
-    );
-  }
+      localStorage.setItem("theme", mode);
+    } catch {
+      /* ignore */
+    }
+  }, [mode]);
 
   return (
     <button
-      className="rounded border border-neutral-300 dark:border-neutral-700 px-2 py-1 text-sm"
-      onClick={toggle}
-      aria-label="Toggle color theme"
+      onClick={() => setMode((m) => (m === "dark" ? "light" : "dark"))}
+      aria-label="Toggle color scheme"
+      className="rounded border px-3 py-1 text-sm"
+      title={mode === "dark" ? "Dark" : "Light"}
     >
-      {dark ? "Light" : "Dark"}
+      {mode === "dark" ? "Dark" : "Light"}
     </button>
   );
 }
