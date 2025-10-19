@@ -21,8 +21,7 @@ export const metadata = {
   description: "Portfolio with research, demos, and AI/ML artifacts.",
   openGraph: {
     title: "Jordan Montenegro — AI/ML Research Engineer & Clinical ML Researcher",
-    description:
-      "ML/AI prototypes with calibration, decision-curve analysis, and safe demos.",
+    description: "ML/AI prototypes with calibration, decision-curve analysis, and safe demos.",
     url: "/",
     siteName: "Jordan Montenegro",
     type: "website",
@@ -31,8 +30,7 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Jordan Montenegro — AI/ML Research Engineer & Clinical ML Researcher",
-    description:
-      "ML/AI prototypes with calibration, decision-curve analysis, and safe demos.",
+    description: "ML/AI prototypes with calibration, decision-curve analysis, and safe demos.",
     images: ["/og"],
   },
   robots: "index,follow",
@@ -70,8 +68,6 @@ export default function RootLayout({ children }) {
 @media (prefers-color-scheme: dark){html{background:#0a0a0a}}
 @media (prefers-color-scheme: light){html{background:#ffffff}}
 `}</style>
-
-        {/* View Transitions keyframes (native, graceful fallback) */}
         <style>{`
 :root::view-transition-old(root), :root::view-transition-new(root) {
   animation-duration: 180ms;
@@ -80,19 +76,12 @@ export default function RootLayout({ children }) {
 `}</style>
       </head>
       <body className="min-h-screen overflow-x-hidden bg-white text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100">
-        {/* thin top progress bar for long pages */}
         <TopProgress />
-
-        {/* Sticky header */}
         <SiteHeader />
-
-        {/* View transitions listener (no UI) */}
         <ViewTransitions />
-
         <main id="main" className="mx-auto max-w-7xl px-4 py-10">
           {children}
         </main>
-
         <footer className="mt-16 border-t border-neutral-200/60 dark:border-neutral-800">
           <div className="mx-auto max-w-7xl px-4 py-6 text-sm text-neutral-500">
             © {new Date().getFullYear()} Jordan Montenegro — AI/ML Research Engineer & Clinical ML Researcher

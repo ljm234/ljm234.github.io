@@ -1,0 +1,9 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = true
+[remote "origin"]
+	url = https://github.com/Ensign-College/cs-220-portfolio-v3-ljm234.git
+	tagOpt = --no-tags
+	fetch = +refs/*:refs/*
+	pushurl = git@github.com:ljm234/ljm234.github.io.git

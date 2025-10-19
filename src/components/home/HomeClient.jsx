@@ -185,8 +185,7 @@ export default function HomeClient() {
         </div>
       </section>
 
-      {/* SELECTED WORK */
-      }
+      {/* SELECTED WORK */}
       <section className="space-y-4">
         <h2 className="text-xl font-semibold tracking-tight">Selected work</h2>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -235,8 +234,8 @@ function Arrow() {
 }
 
 function StyleBlock() {
-  return (
-    <style>{`
+  // same CSS as before; rendered in a way that avoids hydration diffing
+  const CSS = `
       /* Title treatments */
       .title-grad{
         background: linear-gradient(90deg,#22c55e,#38bdf8,#6366f1);
@@ -269,12 +268,10 @@ function StyleBlock() {
         border:1px solid rgba(0,0,0,.12);
       }
       .btn-ghost:hover{ background:rgba(0,0,0,.035); transform:translateY(-1px); }
-      @media (prefers-color-scheme: dark){
-        .btn-ghost{ border-color:rgba(255,255,255,.15) }
-        .btn-ghost:hover{ background:rgba(255,255,255,.06) }
-      }
+      .dark .btn-ghost{ border-color:rgba(255,255,255,.15) }
+      .dark .btn-ghost:hover{ background:rgba(255,255,255,.06) }
 
-      /* Cards (fix dark mode gray: make glassy) */
+      /* Cards (dark mode uses .dark class, not media query) */
       .card{
         transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
         background: rgba(255,255,255,.7);
@@ -293,16 +290,16 @@ function StyleBlock() {
         padding:.35rem .55rem; border-radius:9999px; border:1px solid rgba(0,0,0,.12);
         background:rgba(255,255,255,.75);
       }
-      @media (prefers-color-scheme: dark){
-        .card{
-          background: rgba(18,18,18,.35);
-          border-color: rgba(255,255,255,.12);
-          backdrop-filter: saturate(1.2) blur(8px);
-        }
-        .chip{
-          border-color:rgba(255,255,255,.12);
-          background:rgba(18,18,18,.5);
-        }
+
+      /* Dark-mode overrides driven by html.dark */
+      .dark .card{
+        background: rgba(18,18,18,.35);
+        border-color: rgba(255,255,255,.12);
+        backdrop-filter: saturate(1.2) blur(8px);
+      }
+      .dark .chip{
+        border-color:rgba(255,255,255,.12);
+        background:rgba(18,18,18,.5);
       }
 
       /* Marquee */
@@ -338,6 +335,11 @@ function StyleBlock() {
           linear-gradient(to bottom, rgba(0,0,0,.04) 1px, transparent 1px);
         background-size: 44px 44px; mask-image: radial-gradient(80% 80% at 50% 40%, #000, transparent 75%);
       }
-    `}</style>
+  `;
+  return (
+    <style
+      suppressHydrationWarning
+      dangerouslySetInnerHTML={{ __html: CSS }}
+    />
   );
 }
