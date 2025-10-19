@@ -87,7 +87,10 @@ export default function HomeClient() {
         </div>
 
         <div className="p-6 md:p-10">
-          <h1 className="text-balance text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
+          <h1
+            data-testid="hero-title"
+            className="text-balance text-4xl md:text-5xl font-extrabold tracking-tight leading-tight"
+          >
             <span className="title-grad">Clinical&nbsp;ML</span>{" "}
             and{" "}
             <span className="title-grad-2">AI/ML products</span>{" "}
