@@ -185,7 +185,8 @@ export default function HomeClient() {
         </div>
       </section>
 
-      {/* SELECTED WORK */}
+      {/* SELECTED WORK */
+      }
       <section className="space-y-4">
         <h2 className="text-xl font-semibold tracking-tight">Selected work</h2>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -273,8 +274,12 @@ function StyleBlock() {
         .btn-ghost:hover{ background:rgba(255,255,255,.06) }
       }
 
-      /* Cards */
-      .card{ transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; background:rgba(255,255,255,.7); }
+      /* Cards (fix dark mode gray: make glassy) */
+      .card{
+        transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+        background: rgba(255,255,255,.7);
+        backdrop-filter: saturate(1.05) blur(6px);
+      }
       .card:hover{ transform: translateY(-3px); }
       .glow{
         pointer-events:none; position:absolute; inset:-1px; border-radius:1rem; opacity:0; transition:opacity .25s ease;
@@ -289,8 +294,15 @@ function StyleBlock() {
         background:rgba(255,255,255,.75);
       }
       @media (prefers-color-scheme: dark){
-        .card{ background:rgba(12,12,12,.65) }
-        .chip{ border-color:rgba(255,255,255,.12); background:rgba(18,18,18,.6) }
+        .card{
+          background: rgba(18,18,18,.35);
+          border-color: rgba(255,255,255,.12);
+          backdrop-filter: saturate(1.2) blur(8px);
+        }
+        .chip{
+          border-color:rgba(255,255,255,.12);
+          background:rgba(18,18,18,.5);
+        }
       }
 
       /* Marquee */
@@ -305,9 +317,7 @@ function StyleBlock() {
       }
 
       /* HERO FX (parallax field) */
-      .heroFX{
-        --mx: 0; --my: 0;
-      }
+      .heroFX{ --mx: 0; --my: 0; }
       .noise{
         position:absolute; inset:0; opacity:.035; pointer-events:none;
         background-image:url('data:image/svg+xml;utf8,\

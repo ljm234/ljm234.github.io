@@ -133,18 +133,18 @@ export default function Contact() {
                 <input name="company" tabIndex={-1} autoComplete="off" />
               </div>
 
-              {/* Actions */}
-              <div className="flex items-center justify-between gap-3 pt-2">
+              {/* Actions (stack on mobile to avoid overflow) */}
+              <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center sm:justify-between">
                 <a
                   href="mailto:jordanmontenegroc.99@gmail.com"
-                  className="text-sm underline opacity-80 hover:opacity-100"
+                  className="max-w-full break-words text-sm underline opacity-80 hover:opacity-100"
                 >
                   Prefer email? jordanmontenegroc.99@gmail.com
                 </a>
                 <button
                   type="submit"
                   disabled={status === "loading"}
-                  className="relative inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-5 py-2.5 font-medium text-white transition hover:bg-emerald-700 active:translate-y-[1px] disabled:cursor-not-allowed disabled:opacity-70"
+                  className="relative inline-flex items-center gap-2 self-end rounded-xl bg-emerald-600 px-5 py-2.5 font-medium text-white transition hover:bg-emerald-700 active:translate-y-[1px] disabled:cursor-not-allowed disabled:opacity-70 sm:self-auto"
                 >
                   <span className="pointer-events-none absolute inset-0 -z-10 rounded-xl bg-gradient-to-r from-emerald-400/0 via-sky-400/0 to-indigo-400/0 opacity-0 blur transition group-hover:opacity-40" />
                   {status === "loading" ? (

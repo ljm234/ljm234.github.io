@@ -1,3 +1,4 @@
+// src/app/layout.jsx
 import "./globals.css";
 import SiteHeader from "@/components/layout/SiteHeader";
 import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
@@ -20,7 +21,8 @@ export const metadata = {
   description: "Portfolio with research, demos, and AI/ML artifacts.",
   openGraph: {
     title: "Jordan Montenegro — AI/ML Research Engineer & Clinical ML Researcher",
-    description: "ML/AI prototypes with calibration, decision-curve analysis, and safe demos.",
+    description:
+      "ML/AI prototypes with calibration, decision-curve analysis, and safe demos.",
     url: "/",
     siteName: "Jordan Montenegro",
     type: "website",
@@ -29,7 +31,8 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Jordan Montenegro — AI/ML Research Engineer & Clinical ML Researcher",
-    description: "ML/AI prototypes with calibration, decision-curve analysis, and safe demos.",
+    description:
+      "ML/AI prototypes with calibration, decision-curve analysis, and safe demos.",
     images: ["/og"],
   },
   robots: "index,follow",
@@ -76,7 +79,7 @@ export default function RootLayout({ children }) {
 }
 `}</style>
       </head>
-      <body className="min-h-screen bg-white text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100">
+      <body className="min-h-screen overflow-x-hidden bg-white text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100">
         {/* thin top progress bar for long pages */}
         <TopProgress />
 

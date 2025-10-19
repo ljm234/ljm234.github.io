@@ -14,7 +14,7 @@ export default function AboutPage() {
   const [lightbox, setLightbox] = useState(null); // {src, alt} | null
 
   return (
-    <div className="relative mx-auto max-w-6xl px-4 pt-2 pb-12 md:pt-3 md:pb-16 space-y-14">
+    <div className="relative mx-auto max-w-6xl px-4 pt-2 pb-12 md:pt-3 md:pb-16 space-y-14 overflow-x-hidden">
       {/* BACKDROP */}
       <NeuralGrid className="pointer-events-none absolute inset-0 -z-20 opacity-50" />
       <div
@@ -81,7 +81,7 @@ export default function AboutPage() {
                 width={1600}
                 height={1200}
                 priority
-                className="h-[360px] w-full object-cover animate-ken will-change-transform"
+                className="h-[360px] w-full max-w-full object-cover animate-ken will-change-transform"
               />
               <OverlayHint />
             </button>
@@ -90,7 +90,7 @@ export default function AboutPage() {
       </section>
 
       {/* LAB GALLERY */}
-      <section className="relative space-y-3">
+      <section className="relative space-y-3 overflow-x-hidden">
         <div className="absolute inset-x-0 -bottom-2">
           <SectionRidges />
         </div>
@@ -122,7 +122,7 @@ export default function AboutPage() {
                 width={1600}
                 height={1200}
                 loading="lazy"
-                className="h-[320px] w-full object-cover animate-ken will-change-transform"
+                className="h-[320px] w-full max-w-full object-cover animate-ken will-change-transform"
               />
               <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-3 text-sm text-white">
                 Planning assays & documenting changes at the hood.
@@ -149,7 +149,7 @@ export default function AboutPage() {
                 width={1600}
                 height={1200}
                 loading="lazy"
-                className="h-[320px] w-full object-cover animate-ken will-change-transform"
+                className="h-[320px] w-full max-w-full object-cover animate-ken will-change-transform"
               />
               <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-3 text-sm text-white">
                 Microscopy & growth experiments inform model features.
@@ -161,7 +161,7 @@ export default function AboutPage() {
       </section>
 
       {/* LIFE & MILESTONES */}
-      <section className="relative space-y-3">
+      <section className="relative space-y-3 overflow-x-hidden">
         <div className="absolute inset-x-0 -bottom-2">
           <SectionRidges />
         </div>
@@ -192,7 +192,7 @@ export default function AboutPage() {
                 width={1600}
                 height={1200}
                 loading="lazy"
-                className="h-[320px] w-full object-cover animate-ken will-change-transform"
+                className="h-[320px] w-full max-w-full object-cover animate-ken will-change-transform"
               />
               <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-3 text-sm text-white">
                 Commencement — grateful and just getting started.
@@ -219,7 +219,7 @@ export default function AboutPage() {
                 width={1600}
                 height={1200}
                 loading="lazy"
-                className="h-[320px] w-full object-cover animate-ken will-change-transform"
+                className="h-[320px] w-full max-w-full object-cover animate-ken will-change-transform"
               />
               <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-3 text-sm text-white">
                 Late-night runs by the water keep the head clear.
@@ -249,7 +249,7 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <section className="rounded-2xl border p-6 md:p-8 bg-white/70 dark:bg-neutral-950/50">
+      <section className="rounded-2xl border p-6 md:p-8 bg-white/70 dark:bg-neutral-950/50 overflow-x-hidden">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
             <h3 className="text-xl font-semibold tracking-tight">Want the technical deep-dive?</h3>
