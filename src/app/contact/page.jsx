@@ -247,7 +247,7 @@ function SuccessCard() {
         I’ll reply shortly. If it’s urgent, email{" "}
         <a
           className="underline"
-          href="mailto:requests@jordanmontenegrocalla.com"
+          href="mailto:urgent@jordanmontenegrocalla.com"
         >
           requests@jordanmontenegrocalla.com
         </a>
