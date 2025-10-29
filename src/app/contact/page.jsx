@@ -136,10 +136,10 @@ export default function Contact() {
               {/* Actions (stack on mobile to avoid overflow) */}
               <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center sm:justify-between">
                 <a
-                  href="mailto:jordanmontenegroc.99@gmail.com"
+                  href="mailto:requests@jordanmontenegrocalla.com"
                   className="max-w-full break-words text-sm underline opacity-80 hover:opacity-100"
                 >
-                  Prefer email? jordanmontenegroc.99@gmail.com
+                  Prefer email? requests@jordanmontenegrocalla.com
                 </a>
                 <button
                   type="submit"
@@ -245,8 +245,11 @@ function SuccessCard() {
       <h2 className="mt-3 text-lg font-semibold">Thanks — got it!</h2>
       <p className="mx-auto mt-1 max-w-md text-sm text-neutral-700 dark:text-neutral-300">
         I’ll reply shortly. If it’s urgent, email{" "}
-        <a className="underline" href="mailto:contact@yourdomain.dev">
-          contact@yourdomain.dev
+        <a
+          className="underline"
+          href="mailto:requests@jordanmontenegrocalla.com"
+        >
+          requests@jordanmontenegrocalla.com
         </a>
         .
       </p>
