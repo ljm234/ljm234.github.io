@@ -35,6 +35,11 @@ export const metadata = {
   },
   robots: "index,follow",
   alternates: { canonical: "/" },
+
+  // ⬇⬇⬇ ADDED: tell Next/OG what favicon to use
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export const viewport = {
@@ -63,6 +68,9 @@ export default function RootLayout({ children }) {
       suppressHydrationWarning
     >
       <head>
+        {/* ⬇⬇⬇ ADDED: old-school favicon link for browsers that ignore metadata.icons */}
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT }} />
         <style id="prepaint">{`html{color-scheme: light dark}
 @media (prefers-color-scheme: dark){html{background:#0a0a0a}}
