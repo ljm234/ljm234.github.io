@@ -136,10 +136,10 @@ export default function Contact() {
               {/* Actions (stack on mobile to avoid overflow) */}
               <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center sm:justify-between">
                 <a
-                  href="mailto:requests@jordanmontenegrocalla.com"
+                  href="mailto:request@jordanmontenegrocalla.com"
                   className="max-w-full break-words text-sm underline opacity-80 hover:opacity-100"
                 >
-                  Prefer email? requests@jordanmontenegrocalla.com
+                  Prefer email? request@jordanmontenegrocalla.com
                 </a>
                 <button
                   type="submit"
