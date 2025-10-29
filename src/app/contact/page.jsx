@@ -249,7 +249,7 @@ function SuccessCard() {
           className="underline"
           href="mailto:urgent@jordanmontenegrocalla.com"
         >
-          requests@jordanmontenegrocalla.com
+          urgent@jordanmontenegrocalla.com
         </a>
         .
       </p>
